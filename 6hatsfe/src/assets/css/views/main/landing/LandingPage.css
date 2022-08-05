@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+.logo-container {
+  height: 100%;
+}
+
+.logo-body {
+  height: 50%;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
