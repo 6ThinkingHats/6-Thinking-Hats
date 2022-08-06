@@ -27,6 +27,7 @@ public class UserController {
     // User Create (POST)
     @PostMapping("")
     public ResponseEntity postUser(@RequestBody UserPostRequestDTO userPostRequestDTO){
+        System.out.println(userPostRequestDTO);
         userService.postUser(userPostRequestDTO);
 
         // email 확인 로직과 관련해서 고민중

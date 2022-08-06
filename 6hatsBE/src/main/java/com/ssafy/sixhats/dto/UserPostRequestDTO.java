@@ -6,11 +6,13 @@ import com.ssafy.sixhats.vo.type.Job;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class UserPostRequestDTO {
     private Long userId;
     private String email;
