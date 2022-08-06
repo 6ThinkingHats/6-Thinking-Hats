@@ -40,17 +40,4 @@ public class UserPostRequestDTO {
                 .gender(gender)
                 .build();
     }
-
-    @Override
-    public String toString() {
-        return "UserCreateRequestDTO{" +
-                "userId=" + userId +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", job=" + job +
-                ", birth=" + birth +
-                ", gender=" + gender +
-                '}';
-    }
 }
