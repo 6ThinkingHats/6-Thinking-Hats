@@ -20,7 +20,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    /** 게시글 - 목록 조회 */
+    //게시글 전체
     @Transactional(readOnly = true)
     public List<BoardResponseDTO> findAll() {
 
@@ -30,7 +30,7 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
-    /** 게시글 - 상세 조회 */
+    //게시글 하나
     @Transactional(readOnly = true)
     public BoardResponseDTO findById(int boardId) {
 
@@ -40,7 +40,7 @@ public class BoardService {
         return new BoardResponseDTO(board);
     }
 
-    /** 게시글 - 등록 */
+    //게시글 작성
     @Transactional
     public Integer post(BoardPostRequestDTO boardPostRequestDTO) {
 
@@ -48,7 +48,7 @@ public class BoardService {
                 .getBoardId();
     }
 
-    /** 게시글 - 수정 */
+    //게시글 수정
     @Transactional
     public Integer patch(Integer boardId, BoardPatchRequestDTO boardPatchRequestDTO) {
 
@@ -60,7 +60,7 @@ public class BoardService {
         return boardId;
     }
 
-    /** 게시글 - 삭제 */
+    //게시글 삭제
     @Transactional
     public void delete(int boardId) {
 
