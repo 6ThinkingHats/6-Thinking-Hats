@@ -1,7 +1,6 @@
 package com.ssafy.sixhats.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.ssafy.sixhats.dao.UserDAO;
@@ -107,23 +106,17 @@ public class BoardService {
                      -> 작성자 아이디 != 유저 아이디 -> UnAuthorizedException()
      */
     @Transactional
-    public void delete(int boardId, int userId) {
+    public void delete(int boardId, UserVO userId) {
 
         BoardVO board = boardDAO.findById(boardId)
                 .orElseThrow(() -> new IllegalAccessError("[boardId=" + boardId + "] 해당 게시글이 존재하지 않습니다."));
 
-
-        if(userId != null){
-            if (!board.checkwriterOfBoard(userId)) {
-                throw new UnAuthorizedException();
-
-            } else {
-                board.patch(boardPatchRequestDTO.getTitle(), boardPatchRequestDTO.getBoard_contents());
-            }
+        if (!board.checkwriterOfBoard(userId)) {
+            boardDAO.delete(board);
 
         } else {
-            throw new NullPointerException("User Not Found");
+            throw new UnAuthorizedException();
         }
-        boardDAO.delete(board);
+
     }
 }
