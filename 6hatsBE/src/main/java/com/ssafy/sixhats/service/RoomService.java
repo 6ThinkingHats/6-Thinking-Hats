@@ -98,10 +98,6 @@ public class RoomService {
         }
     }
 
-    public void bannedPatchRoom(Long userId, Long roomId) {
-        UserRoomVO userRoomVO = userRoomDAO.findUserRoomVOByRoomVOAndUserVO(userDAO.findById(userId).orElse(null),roomDAO.findById(roomId).orElse(null));
-
-    }
 
 
 }
