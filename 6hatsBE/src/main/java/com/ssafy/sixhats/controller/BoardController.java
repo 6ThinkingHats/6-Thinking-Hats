@@ -47,7 +47,7 @@ public class BoardController {
     }
 
     //게시글 수정
-    @PatchMapping (value = "/{board_id}")
+    @PatchMapping(value = "/{board_id}")
     public ResponseEntity<Integer> patch(@PathVariable("board_id") int boardId, @RequestBody BoardPatchRequestDTO boardPatchRequestDTO) {
 
         int patchedboardId = boardService.patch(boardId, boardPatchRequestDTO);
