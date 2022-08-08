@@ -6,11 +6,13 @@ import com.ssafy.sixhats.vo.type.Job;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class UserLoginRequestDTO {
     private String email;
     private String password;
@@ -21,11 +23,4 @@ public class UserLoginRequestDTO {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "UserCreateRequestDTO{" +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

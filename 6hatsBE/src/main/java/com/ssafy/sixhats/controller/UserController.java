@@ -3,6 +3,7 @@ package com.ssafy.sixhats.controller;
 import com.ssafy.sixhats.dto.*;
 import com.ssafy.sixhats.exception.UnAuthorizedException;
 import com.ssafy.sixhats.service.JwtService;
+import com.ssafy.sixhats.service.OAuthService;
 import com.ssafy.sixhats.service.UserService;
 import com.ssafy.sixhats.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class UserController {
 
     @Autowired
     JwtService jwtService;
+
+    @Autowired
+    OAuthService oAuthService;
 
     // User Create (POST)
     @PostMapping("")
@@ -117,4 +121,13 @@ public class UserController {
         return new ResponseEntity(resultMap, status);
     }
 
+    @PostMapping("login/kakao")
+    public ResponseEntity loginKakao(@RequestBody String code) {
+        System.out.println(code);
+        Map<String, String> tokenMap = oAuthService.getKaKaoAccessToken(code);
+        oAuthService.createKakaoUser(tokenMap.get("access-token"));
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.OK;
+        return new ResponseEntity(resultMap, status);
+    }
 }
