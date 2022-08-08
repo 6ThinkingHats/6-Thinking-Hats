@@ -8,10 +8,25 @@ import java.util.Map;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.ssafy.sixhats.dao.RoomDAO;
+import com.ssafy.sixhats.dao.UserDAO;
+import com.ssafy.sixhats.util.RandomStringMaker;
+import com.ssafy.sixhats.vo.UserVO;
+import com.ssafy.sixhats.vo.type.Gender;
+import com.ssafy.sixhats.vo.type.Job;
+import com.ssafy.sixhats.vo.type.LoginType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OAuthService {
+
+    @Autowired
+    UserDAO userDAO;
+
+    @Autowired
+    RandomStringMaker randomStringMaker;
 
     public Map<String, String> getKaKaoAccessToken(String code) {
         Map<String, String> map = new HashMap<>();
@@ -61,43 +76,76 @@ public class OAuthService {
         return map;
     }
 
-    public void createKakaoUser(String token) {
+    @Transactional
+    public UserVO createKakaoUser(String token) throws IOException{
 
         String reqURL = "https://kapi.kakao.com/v2/user/me";
 
-        // access_token을 이용하여 사용자 정보 조회
-        try {
-            URL url = new URL(reqURL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        URL url = new URL(reqURL);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            conn.setRequestProperty("Authorization", "Bearer " + token); // 전송할 header 작성, access_token전송
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+        conn.setRequestProperty("Authorization", "Bearer " + token); // 전송할 header 작성, access_token전송
 
-            // 결과 코드가 200이라면 성공
-            int responseCode = conn.getResponseCode();
-            // 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String line = "";
-            String result = "";
+        // 결과 코드가 200이라면 성공
+        int responseCode = conn.getResponseCode();
+        // 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String line = "";
+        String result = "";
 
-            while ((line = br.readLine()) != null) {
-                result += line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+
+        // Gson 라이브러리로 JSON파싱
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(result);
+
+        String email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
+        // Social Login
+        // email로 user를 찾는다
+        UserVO userVO = userDAO.findByEmail(email).orElse(null);
+
+        if (userVO == null) {
+            // user가 없다면 user를 만들어주고 저장하고 return
+            // name
+            String name = element.getAsJsonObject().get("properties").getAsJsonObject().get("nickname").getAsString();
+
+            // gender
+            String genderTmp = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("gender").getAsString();
+            Gender gender = Gender.WOMAN;
+            if(genderTmp.equals("male")){
+                gender = Gender.MAN;
             }
 
-            // Gson 라이브러리로 JSON파싱
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(result);
+            // job
+            Job job = Job.OTHER;
 
-            String email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
-            String gender = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("gender").getAsString();
-            String name = element.getAsJsonObject().get("properties").getAsJsonObject().get("nickname").getAsString();
+            // password
+            String password = randomStringMaker.getRandomString(10);
+
+            // profile image
             String profileImageUrl = element.getAsJsonObject().get("properties").getAsJsonObject().get("profile_image").getAsString();
 
+            // UserVO 생성
+            userVO = UserVO.builder()
+                    .email(email)
+                    .password(password)
+                    .name(name)
+                    .job(job)
+                    .gender(gender)
+                    .build();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            // login type 추가
+            userVO.updateLoginType(LoginType.KAKAO);
+            userVO.updateProfileImageUrl(profileImageUrl);
+
+            userVO = userDAO.save(userVO);
         }
+
+        return userVO;
     }
 
 }

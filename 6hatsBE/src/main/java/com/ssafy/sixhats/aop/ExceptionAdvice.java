@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,15 @@ public class ExceptionAdvice {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("message", "Duplicated Key");
         HttpStatus status = HttpStatus.CONFLICT;
+
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity handleException(IOException e){
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("message", "oauth fail");
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
         return new ResponseEntity(resultMap, status);
     }

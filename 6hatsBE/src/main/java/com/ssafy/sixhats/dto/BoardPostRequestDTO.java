@@ -27,9 +27,6 @@ public class BoardPostRequestDTO {
     }
 
     public BoardVO toEntity(UserVO userId) {
-
-
-
         return BoardVO.builder()
                 .userId(userId)
                 .title(title)
