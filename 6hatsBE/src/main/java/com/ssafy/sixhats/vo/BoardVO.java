@@ -22,6 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -90,4 +91,10 @@ public class BoardVO {
     public void delete(int boardId) {
         this.boardId = boardId;
     }
+
+    public boolean checkwriterOfBoard(UserVO userId){
+        return Objects.equals(this.userId.getUserId(), userId.getUserId());
+    }
+
+
 }

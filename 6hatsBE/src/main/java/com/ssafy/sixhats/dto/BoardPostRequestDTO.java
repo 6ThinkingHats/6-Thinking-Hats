@@ -5,6 +5,7 @@ import com.ssafy.sixhats.vo.BoardVO;
 import com.ssafy.sixhats.vo.UserVO;
 import com.ssafy.sixhats.vo.type.BoardType;
 
+import com.ssafy.sixhats.vo.type.UserType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,9 +27,11 @@ public class BoardPostRequestDTO {
         this.boardType = boardType;
     }
 
+    public void update(BoardType boardType) {
+        this.boardType = boardType;
+    }
+
     public BoardVO toEntity(UserVO userId) {
-
-
 
         return BoardVO.builder()
                 .userId(userId)
@@ -37,4 +40,5 @@ public class BoardPostRequestDTO {
                 .boardType(boardType)
                 .build();
     }
+
 }
