@@ -1,4 +1,4 @@
-package com.ssafy.sixhats.domain;
+package com.ssafy.sixhats.vo;
 
 import com.ssafy.sixhats.vo.UserVO;
 import com.ssafy.sixhats.vo.type.BoardType;
@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 이 설정으로 setter 접근 막을 수 있음
  */
+import net.bytebuddy.asm.Advice;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +35,7 @@ import javax.persistence.Table;
 @Entity
 @Data
 @Table(name = "board")
-public class Board {
+public class BoardVO {
 
     /*User 와 Board 관계 ManyToOne
     fk user_id 로 join
@@ -57,7 +59,7 @@ public class Board {
 
     @Column(nullable = false, name = "board_created_at")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate boardCreatedAt;
+    private LocalDate boardCreatedAt = LocalDate.now();
 
     /*
     board_type : qna, ntc(notice)
@@ -73,7 +75,7 @@ public class Board {
 
 
     @Builder
-    public Board(UserVO userId, String title, String board_contents, BoardType boardType) {
+    public BoardVO(UserVO userId, String title, String board_contents, BoardType boardType) {
         this.userId = userId;
         this.title = title;
         this.board_contents = board_contents;
