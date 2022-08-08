@@ -1,10 +1,14 @@
 package com.ssafy.sixhats.vo;
 
+import com.ssafy.sixhats.dto.UserPatchRequestDTO;
+import com.ssafy.sixhats.dto.UserPutRequestDTO;
 import com.ssafy.sixhats.vo.type.Gender;
 import com.ssafy.sixhats.vo.type.Job;
 import com.ssafy.sixhats.vo.type.LoginType;
 import com.ssafy.sixhats.vo.type.UserType;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -16,7 +20,8 @@ import java.time.LocalDate;
 @DynamicInsert
 @DynamicUpdate
 @Entity
-@Data
+@Getter
+@NoArgsConstructor
 @Table(name = "user")
 public class UserVO {
     // 원활한 테스트를 위해서 우선 userid,email,password,name으로만 설정
@@ -25,41 +30,68 @@ public class UserVO {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(unique = true, length = 100)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String password;
 
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(length = 20)
+    @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
     private Job job;
 
-    @Column(name = "login_type", length = 10)
-    @ColumnDefault("'GENERAL'")
-    @Enumerated(EnumType.STRING)
-    private LoginType loginType;
-
-    @Column(name = "user_type", length = 5)
-    @Enumerated(EnumType.STRING)
-    @ColumnDefault("'USER'")
-    private UserType userType;
-
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth;
 
-    @Column(length = 5)
+    @Column(nullable = false, length = 5)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name="profile_image_url", length = 100)
+    // Nullable 기준선 위에 필드들은 Builder로 안전하게 받을 수 있으어햠
+    // 아래에는 전부 default가 잇으므로 설정하지 않아도 됌 후에 setter를 만들어서 처리
+    @Column(nullable = false, name="profile_image_url", length = 100)
     @ColumnDefault("'NOT'")
-    private String profileImageUrl;
+    private String profileImageUrl = "NOT";
 
-    @Column(name = "is_active")
+    @Column(name = "is_active", nullable = false)
     @ColumnDefault("true")
-    private boolean isActive;
+    private boolean isActive = true;
+
+    @Column(name = "login_type", nullable = false, length = 10)
+    @ColumnDefault("'GENERAL'")
+    @Enumerated(EnumType.STRING)
+    private LoginType loginType = LoginType.GENERAL;
+
+    @Column(name = "user_type", nullable = false, length = 5)
+    @Enumerated(EnumType.STRING)
+    @ColumnDefault("'USER'")
+    private UserType userType = UserType.USER;
+    @Builder
+    public UserVO(String email, String password, String name, Job job, LocalDate birth, Gender gender){
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.job = job;
+        this.birth = birth;
+        this.gender = gender;
+    }
+
+    public void update(UserPutRequestDTO userPutRequestDTO) {
+        this.email = userPutRequestDTO.getEmail();
+        this.name = userPutRequestDTO.getName();
+        this.job = userPutRequestDTO.getJob();
+        this.birth = userPutRequestDTO.getBirth();
+        this.gender = userPutRequestDTO.getGender();
+    }
+
+    public void updatePassword(String password){
+        this.password = password;
+    }
+    public void updateIsActive() {
+        this.isActive = false;
+    }
 }
