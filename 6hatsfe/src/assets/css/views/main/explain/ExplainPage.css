@@ -1,0 +1,5 @@
+@charset "utf-8";
+
+.explain-body {
+  top: calc( 72 / 1080 * 100% );
+}
