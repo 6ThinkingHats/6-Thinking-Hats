@@ -9,6 +9,7 @@ import com.ssafy.sixhats.vo.type.UserType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -22,6 +23,7 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @NoArgsConstructor
+@ToString
 @Table(name = "user")
 public class UserVO {
     // 원활한 테스트를 위해서 우선 userid,email,password,name으로만 설정

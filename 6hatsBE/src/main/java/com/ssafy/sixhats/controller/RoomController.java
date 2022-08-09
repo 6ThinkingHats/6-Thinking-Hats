@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("room")
+@RequestMapping("/room")
 public class RoomController {
 
     @Autowired

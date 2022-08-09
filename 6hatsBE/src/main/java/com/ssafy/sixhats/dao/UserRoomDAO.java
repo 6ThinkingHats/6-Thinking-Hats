@@ -6,5 +6,5 @@ import com.ssafy.sixhats.vo.UserVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRoomDAO extends JpaRepository<UserRoomVO, Long> {
-    UserRoomVO findUserRoomVOByRoomVOAndUserVO(UserVO userVO, RoomVO roomVO);
+    UserRoomVO findUserRoomVOByRoomVOAndUserVO(RoomVO roomVO, UserVO userVO);
 }
