@@ -1,8 +1,9 @@
-package com.ssafy.sixhats.vo.type;
+package com.ssafy.sixhats.vo;
 
 import com.ssafy.sixhats.vo.ConferenceVO;
 import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.UserVO;
+import com.ssafy.sixhats.vo.type.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
