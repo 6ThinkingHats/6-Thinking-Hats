@@ -1,5 +1,6 @@
 package com.ssafy.sixhats.vo;
 
+import com.ssafy.sixhats.dto.BoardPatchRequestDTO;
 import com.ssafy.sixhats.vo.UserVO;
 import com.ssafy.sixhats.vo.type.BoardType;
 
@@ -83,17 +84,9 @@ public class BoardVO {
         this.boardType = boardType;
     }
 
-    public void patch(String title, String board_contents) {
-        this.title = title;
-        this.board_contents = board_contents;
-    }
-
-    public void delete(int boardId) {
-        this.boardId = boardId;
-    }
-
-    public boolean checkwriterOfBoard(UserVO userId){
-        return Objects.equals(this.userId.getUserId(), userId.getUserId());
+    public void patch(BoardPatchRequestDTO boardPatchRequestDTO) {
+        this.title = boardPatchRequestDTO.getTitle();
+        this.board_contents = boardPatchRequestDTO.getBoard_contents();
     }
 
 
