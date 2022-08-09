@@ -45,7 +45,6 @@ public class UserVO {
     @Enumerated(EnumType.STRING)
     private Job job;
 
-    @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth;
 
@@ -73,12 +72,11 @@ public class UserVO {
     @ColumnDefault("'USER'")
     private UserType userType = UserType.USER;
     @Builder
-    public UserVO(String email, String password, String name, Job job, LocalDate birth, Gender gender){
+    public UserVO(String email, String password, String name, Job job, Gender gender){
         this.email = email;
         this.password = password;
         this.name = name;
         this.job = job;
-        this.birth = birth;
         this.gender = gender;
     }
 
@@ -86,14 +84,21 @@ public class UserVO {
         this.email = userPutRequestDTO.getEmail();
         this.name = userPutRequestDTO.getName();
         this.job = userPutRequestDTO.getJob();
-        this.birth = userPutRequestDTO.getBirth();
         this.gender = userPutRequestDTO.getGender();
     }
 
+    public void updateUserType(UserType type) {
+        this.userType = type;
+    }
+    public void updateBirth(LocalDate date) {this.birth = date;}
+
+    public void updateLoginType(LoginType type) {this.loginType = type;}
     public void updatePassword(String password){
         this.password = password;
     }
     public void updateIsActive() {
         this.isActive = false;
     }
+
+    public void updateProfileImageUrl(String profileImageUrl){ this.profileImageUrl = profileImageUrl; }
 }

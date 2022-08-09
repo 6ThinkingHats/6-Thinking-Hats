@@ -14,7 +14,9 @@ public class UserService {
     UserDAO userDAO;
 
     public UserVO postUser(UserPostRequestDTO userPostRequestDTO) {
-        return userDAO.save(userPostRequestDTO.toEntity());
+        UserVO userVO = userPostRequestDTO.toEntity();
+        userVO.updateBirth(userPostRequestDTO.getBirth());
+        return userDAO.save(userVO);
     }
     public UserGetResponseDTO getUser(Long userId) {
         UserVO userVO = userDAO.findById(userId).orElse(null);

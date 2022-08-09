@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @ToString
 public class UserPostRequestDTO {
-    private Long userId;
     private String email;
     private String password;
     private String name;
@@ -38,7 +37,6 @@ public class UserPostRequestDTO {
                 .password(password)
                 .name(name)
                 .job(job)
-                .birth(birth)
                 .gender(gender)
                 .build();
     }

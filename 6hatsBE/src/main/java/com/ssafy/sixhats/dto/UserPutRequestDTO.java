@@ -6,11 +6,13 @@ import com.ssafy.sixhats.vo.type.Job;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class UserPutRequestDTO {
     private String email;
     private String name;
@@ -25,16 +27,5 @@ public class UserPutRequestDTO {
         this.job = job;
         this.birth = birth;
         this.gender = gender;
-    }
-
-    @Override
-    public String toString() {
-        return "UserCreateRequestDTO{" +
-                ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", job=" + job +
-                ", birth=" + birth +
-                ", gender=" + gender +
-                '}';
     }
 }

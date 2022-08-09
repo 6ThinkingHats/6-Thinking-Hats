@@ -3,6 +3,7 @@ package com.ssafy.sixhats.controller;
 import com.ssafy.sixhats.dto.*;
 import com.ssafy.sixhats.exception.UnAuthorizedException;
 import com.ssafy.sixhats.service.JwtService;
+import com.ssafy.sixhats.service.OAuthService;
 import com.ssafy.sixhats.service.UserService;
 import com.ssafy.sixhats.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     JwtService jwtService;
+
+    @Autowired
+    OAuthService oAuthService;
 
     // User Create (POST)
     @PostMapping("")
@@ -117,4 +122,17 @@ public class UserController {
         return new ResponseEntity(resultMap, status);
     }
 
+    @PostMapping("login/kakao")
+    public ResponseEntity loginKakao(@RequestBody String code) throws IOException {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.OK;
+
+        Map<String, String> tokenMap = oAuthService.getKaKaoAccessToken(code);
+        UserVO userVO = oAuthService.createKakaoUser(tokenMap.get("access-token"));
+        System.out.println(userVO);
+        String token = jwtService.createToken(userVO);
+        resultMap.put("access-token", token);
+        resultMap.put("message", "Kakao Login Success");
+        return new ResponseEntity(resultMap, status);
+    }
 }
