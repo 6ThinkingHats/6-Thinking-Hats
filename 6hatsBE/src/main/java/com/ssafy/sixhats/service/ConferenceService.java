@@ -6,6 +6,7 @@ import com.ssafy.sixhats.dto.ConferencePostRequestDTO;
 import com.ssafy.sixhats.vo.ConferenceVO;
 import com.ssafy.sixhats.vo.RoomVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,5 +50,13 @@ public class ConferenceService {
             throw new NullPointerException("Conference Not Found");
         }
 
+    }
+
+    public void deleteConference(Long conferenceId) {
+        try {
+            conferenceDAO.deleteById(conferenceId);
+        } catch (EmptyResultDataAccessException e){
+            throw new NullPointerException("Conference Not Found");
+        }
     }
 }

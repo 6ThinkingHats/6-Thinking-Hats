@@ -42,4 +42,14 @@ public class ConferenceController {
         resultMap.put("message", "conference patch success");
         return new ResponseEntity(resultMap, status);
     }
+
+    @DeleteMapping("{conferenceId}")
+    public ResponseEntity deleteConference(@PathVariable Long conferenceId){ // end time만 바꿔주면 됌
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.NO_CONTENT;
+
+        conferenceService.deleteConference(conferenceId);
+
+        return new ResponseEntity(resultMap, status);
+    }
 }
