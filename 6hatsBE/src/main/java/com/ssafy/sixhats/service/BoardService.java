@@ -1,5 +1,6 @@
 package com.ssafy.sixhats.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,11 +27,29 @@ public class BoardService {
     private final BoardDAO boardDAO;
     private final UserDAO userDAO;
 
-    //게시글 전체
-    @Transactional(readOnly = true)
-    public List<BoardResponseDTO> findAll() {
 
-        return boardDAO.findAll()
+
+    //공지사항 전체
+    @Transactional(readOnly = true)
+    public List<BoardResponseDTO> findNoticeAll() {
+
+        //System.out.println(boardDAO.findAll().stream().map(BoardResponseDTO::new).collect(Collectors.toList()));
+        //System.out.println(board);
+
+        return boardDAO.findByBoardType(BoardType.ntc)
+                .stream()
+                .map(BoardResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    //qna 전체
+    @Transactional(readOnly = true)
+    public List<BoardResponseDTO> findQnaAll() {
+
+        //System.out.println(boardDAO.findAll().stream().map(BoardResponseDTO::new).collect(Collectors.toList()));
+        //System.out.println(board);
+
+        return boardDAO.findByBoardType(BoardType.qna)
                 .stream()
                 .map(BoardResponseDTO::new)
                 .collect(Collectors.toList());
@@ -40,9 +59,11 @@ public class BoardService {
     @Transactional(readOnly = true)
     public BoardResponseDTO findById(int boardId) {
 
-        BoardVO board = boardDAO.findById(boardId)
-                .orElseThrow(() -> new IllegalAccessError("[boardId=" + boardId + "] 해당 게시글이 존재하지 않습니다."));
-
+        BoardVO board = boardDAO.findById(boardId).orElse(null);
+       // System.out.println(board);
+        if(board == null) {
+            throw new NullPointerException("board Not Found");
+        }
         return new BoardResponseDTO(board);
     }
 
@@ -53,10 +74,11 @@ public class BoardService {
                      -> usertype "USER"  -> boardtype "qna"
      */
     @Transactional
-    public Integer post(BoardPostRequestDTO boardPostRequestDTO) {
+    public BoardVO post(BoardPostRequestDTO boardPostRequestDTO) {
 
         UserVO userId = userDAO.findById(boardPostRequestDTO.getUserId()).orElse(null);
-        if(userId != null){
+
+        if( userId != null){
             UserType userType = userId.getUserType();
             if(userType == UserType.ADMIN){
                 boardPostRequestDTO.update(BoardType.ntc);
@@ -67,8 +89,7 @@ public class BoardService {
             throw new NullPointerException("User Not Found");
         }
 
-        return boardDAO.save(boardPostRequestDTO.toEntity(userId))
-                .getBoardId();
+        return boardDAO.save(boardPostRequestDTO.toEntity(userId));
     }
 
     //게시글 수정
@@ -78,25 +99,16 @@ public class BoardService {
                      -> 작성자 아이디 != 유저 아이디 -> UnAuthorizedException()
      */
     @Transactional
-    public Integer patch(Integer boardId,BoardPatchRequestDTO boardPatchRequestDTO) {
+    public void patch(Integer boardId, Long userId, BoardPatchRequestDTO boardPatchRequestDTO) {
 
-        BoardVO board = boardDAO.findById(boardId)
-                .orElseThrow(() -> new IllegalAccessError("[boardId=" + boardId + "] 해당 게시글이 존재하지 않습니다."));
+        BoardVO board = boardDAO.findById(boardId).orElse(null);
 
-        UserVO userId = userDAO.findById(boardPatchRequestDTO.getUserId()).orElse(null);
-        if(userId != null){
-            if (!board.checkwriterOfBoard(userId)) {
-                throw new UnAuthorizedException();
-
-            } else {
-                board.patch(boardPatchRequestDTO.getTitle(), boardPatchRequestDTO.getBoard_contents());
-            }
-
+        if( userId != board.getUserId().getUserId()) {
+            throw new UnAuthorizedException();
         } else {
-            throw new NullPointerException("User Not Found");
+            board.patch(boardPatchRequestDTO);
         }
 
-        return boardId;
     }
 
     //게시글 삭제
@@ -106,17 +118,14 @@ public class BoardService {
                      -> 작성자 아이디 != 유저 아이디 -> UnAuthorizedException()
      */
     @Transactional
-    public void delete(int boardId, UserVO userId) {
+    public void delete(int boardId, Long userId) {
 
-        BoardVO board = boardDAO.findById(boardId)
-                .orElseThrow(() -> new IllegalAccessError("[boardId=" + boardId + "] 해당 게시글이 존재하지 않습니다."));
+        BoardVO board = boardDAO.findById(boardId).orElse(null);
 
-        if (!board.checkwriterOfBoard(userId)) {
-            boardDAO.delete(board);
-
-        } else {
+        if( userId != board.getUserId().getUserId()) {
             throw new UnAuthorizedException();
+        } else {
+            boardDAO.delete(board);
         }
-
     }
 }
