@@ -23,7 +23,7 @@ public class JwtService {
     private final int EXPIRE_MINUTES = 60;
 
     public String getJwtToken(HttpServletRequest request) {
-        return request.getHeader("access-token");
+        return request.getHeader("accessToken");
     }
     /*
     Token을 생성하는 Method
