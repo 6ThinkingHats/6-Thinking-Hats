@@ -6,6 +6,7 @@ import com.ssafy.sixhats.dto.BoardPatchRequestDTO;
 import com.ssafy.sixhats.dto.BoardPostRequestDTO;
 import com.ssafy.sixhats.dto.BoardResponseDTO;
 import com.ssafy.sixhats.service.BoardService;
+import com.ssafy.sixhats.vo.UserVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,9 +58,9 @@ public class BoardController {
 
     //게시글 삭제
     @DeleteMapping(value = "/{board_id}")
-    public ResponseEntity<Integer> delete(@PathVariable("board_id") int boardId) {
+    public ResponseEntity<Integer> delete(@PathVariable("board_id") int boardId, UserVO userId) {
 
-        boardService.delete(boardId);
+        boardService.delete(boardId, userId);
 
         return new ResponseEntity<Integer>(boardId, HttpStatus.NO_CONTENT);
     }
