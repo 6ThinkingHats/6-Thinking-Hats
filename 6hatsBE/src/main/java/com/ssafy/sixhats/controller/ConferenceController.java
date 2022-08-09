@@ -6,10 +6,7 @@ import com.ssafy.sixhats.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +29,17 @@ public class ConferenceController {
         conferenceService.postConference(conferencePostRequestDTO);
 
         resultMap.put("message", "conference create success");
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @PatchMapping("{conferenceId}")
+    public ResponseEntity patchConference(@PathVariable Long conferenceId){ // end time만 바꿔주면 됌
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.OK;
+
+        conferenceService.patchConference(conferenceId);
+
+        resultMap.put("message", "conference patch success");
         return new ResponseEntity(resultMap, status);
     }
 }

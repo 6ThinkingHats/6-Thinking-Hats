@@ -37,4 +37,17 @@ public class ConferenceService {
             throw new NullPointerException("Room Not Found");
         }
     }
+
+    @Transactional
+    public void patchConference(Long conferenceId) {
+
+        ConferenceVO conferenceVO = conferenceDAO.findById(conferenceId).orElse(null);
+
+        if(conferenceVO != null && conferenceVO.getConferenceEndTime() == null){
+            conferenceVO.updateConferenceEndTime(new Date());
+        } else {
+            throw new NullPointerException("Conference Not Found");
+        }
+
+    }
 }
