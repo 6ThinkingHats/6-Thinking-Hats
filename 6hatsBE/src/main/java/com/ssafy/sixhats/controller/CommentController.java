@@ -44,22 +44,10 @@ public class CommentController {
     }
 
 
-    /*@GetMapping(value = "")
-    public ResponseEntity<List<CommentGetResponseDTO>> getAllComment() {
-
-        List<CommentGetResponseDTO> commentList = commentService.getAllComment();
-
-        return new ResponseEntity(commentList, HttpStatus.ACCEPTED);
-
-    }
-
-     */
-
     @GetMapping(value = "")
-    public ResponseEntity<List<CommentGetResponseDTO>> getAllBoardComment( String boardId) {
-        System.out.println(boardId);
+    public ResponseEntity<List<CommentGetResponseDTO>> getAllBoardComment(Long boardId) {
 
-        List<CommentGetResponseDTO> commentList = commentService.getAllBoardComment(Long.parseLong(boardId));
+        List<CommentGetResponseDTO> commentList = commentService.getAllBoardComment(boardId);
 
         return new ResponseEntity(commentList, HttpStatus.ACCEPTED);
 
