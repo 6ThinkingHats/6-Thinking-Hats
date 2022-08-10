@@ -26,7 +26,8 @@ public class UserRoomController {
         return new ResponseEntity("join room success", HttpStatus.OK);
     }
 
-    @PatchMapping ResponseEntity patchUserRoom(Long roomId, HttpServletRequest request) {
+    @PatchMapping("")
+    public ResponseEntity patchUserRoom(Long roomId, HttpServletRequest request) {
         userRoomService.patchUserRoom(roomId, jwtService.getUserId(request));
 
         return new ResponseEntity("user banned success", HttpStatus.OK);

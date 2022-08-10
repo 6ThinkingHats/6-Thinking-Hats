@@ -71,6 +71,7 @@ public class UserVO {
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'USER'")
     private UserType userType = UserType.USER;
+
     @Builder
     public UserVO(String email, String password, String name, Job job, Gender gender){
         this.email = email;
