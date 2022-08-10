@@ -10,7 +10,7 @@ import lombok.Getter;
 public class BoardResponseDTO {
 
     private final String name;
-    private final int boardId;
+    private final Long boardId;
     private final String title;
     private final String board_contents;
     private final BoardType boardType;

@@ -50,7 +50,7 @@ public class BoardVO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //개별 엔티티별로 키값 증가
     @Column(name = "board_id")
-    private int boardId;
+    private Long boardId;
 
 
     @Column(nullable = false, length = 100)
