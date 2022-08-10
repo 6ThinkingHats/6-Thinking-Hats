@@ -54,11 +54,11 @@ public class RoomVO {
         this.roomStartTime = roomStartTime;
     }
 
-
-
-
-
-
+    public void RoomUpdate(String opinionFileUrl, Date roomEndTime) {
+        this.opinionFileUrl = opinionFileUrl;
+        this.roomEndTime = roomEndTime;
+        this.isActive = false;
+    }
 
 
 

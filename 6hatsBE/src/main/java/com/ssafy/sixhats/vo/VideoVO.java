@@ -2,10 +2,8 @@ package com.ssafy.sixhats.vo;
 
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -34,6 +32,7 @@ public class VideoVO {
 
     @Column(name = "video_valid", columnDefinition = "boolean default true")
     private boolean videoValid = true;
+
 
     @Builder
     public VideoVO(RoomVO roomVO, String videoFileUrl) {

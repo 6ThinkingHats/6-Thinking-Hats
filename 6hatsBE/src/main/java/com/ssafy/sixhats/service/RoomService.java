@@ -27,11 +27,16 @@ public class RoomService {
 
     @Autowired
     UserRoomDAO userRoomDAO;
+
+    @Transactional
     public void postRoom(Long userId) {
         UserVO userVO = userDAO.findById(userId).orElse(null);
         if(userVO != null && userVO.isActive()){
             Date date = new Date();
-            RoomVO roomVO = RoomVO.builder().userVO(userVO).roomStartTime(new Date(date.getYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds())).build();
+            RoomVO roomVO = RoomVO.builder()
+                    .userVO(userVO)
+                    .roomStartTime(new Date(date.getYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()))
+                    .build();
             roomDAO.save(roomVO);
         }
     }
@@ -39,14 +44,10 @@ public class RoomService {
     @Transactional
     public void patchRoom(Long roomId, String opinionFileUrl) {
         RoomVO roomVO =  roomDAO.findById(roomId).orElse(null);
-        System.out.println("=============");
-        System.out.println(roomVO);
+
         if(roomVO != null ) {
             Date date = new Date();
-            roomVO.setOpinionFileUrl(opinionFileUrl);
-            roomVO.setRoomEndTime(new Date(date.getYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()));
-            roomVO.setActive(false);
-            System.out.println("=============");
+            roomVO.RoomUpdate(opinionFileUrl, date);
             System.out.println(roomVO);
 
         }
@@ -66,6 +67,7 @@ public class RoomService {
 //        }
 //    }
 
+    @Transactional
     public List<RoomGetResponseDTO> getRoomList(Long userId) {
         List<RoomVO> roomList = new ArrayList<>();
         roomList = roomDAO.findAllByUserVO(userDAO.findById(userId).orElse(null));
@@ -81,16 +83,16 @@ public class RoomService {
         return roomDtoList;
     }
 
-    public void joinPostRoom(Long roomId, Long userId) {
-        RoomVO roomVO = roomDAO.findById(roomId).orElse(null);
-        UserVO userVO = userDAO.findById(userId).orElse(null);
-        if(roomVO != null && roomVO.isActive() && userVO != null && userVO.isActive()) {
-            UserRoomVO userRoomVO = new UserRoomVO().builder()
-                    .roomVO(roomVO)
-                    .userVO(userVO)
-                    .build();
-        }
-    }
+//    public void joinPostRoom(Long roomId, Long userId) {
+//        RoomVO roomVO = roomDAO.findById(roomId).orElse(null);
+//        UserVO userVO = userDAO.findById(userId).orElse(null);
+//        if(roomVO != null && roomVO.isActive() && userVO != null && userVO.isActive()) {
+//            UserRoomVO userRoomVO = new UserRoomVO().builder()
+//                    .roomVO(roomVO)
+//                    .userVO(userVO)
+//                    .build();
+//        }
+//    }
 
 
 
