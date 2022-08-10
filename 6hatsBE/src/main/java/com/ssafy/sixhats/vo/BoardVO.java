@@ -56,8 +56,8 @@ public class BoardVO {
     @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(nullable = false, columnDefinition = "LONGTEXT")
-    private String board_contents;
+    @Column(name="board_contents", columnDefinition = "LONGTEXT")
+    private String boardContents;
 
     @Column(nullable = false, name = "board_created_at")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -77,16 +77,16 @@ public class BoardVO {
 
 
     @Builder
-    public BoardVO(UserVO userId, String title, String board_contents, BoardType boardType) {
+    public BoardVO(UserVO userId, String title, String boardContents, BoardType boardType) {
         this.userId = userId;
         this.title = title;
-        this.board_contents = board_contents;
+        this.boardContents = boardContents;
         this.boardType = boardType;
     }
 
     public void patch(BoardPatchRequestDTO boardPatchRequestDTO) {
         this.title = boardPatchRequestDTO.getTitle();
-        this.board_contents = boardPatchRequestDTO.getBoard_contents();
+        this.boardContents = boardPatchRequestDTO.getBoardContents();
     }
 
 

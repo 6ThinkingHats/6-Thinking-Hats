@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentPatchRequestDTO {
 
-    private String comment_contents;
+    private String commentContents;
 
     @Builder
-    public CommentPatchRequestDTO (String comment_contents) {
+    public CommentPatchRequestDTO (String commentContents) {
         
-        this.comment_contents = comment_contents;
+        this.commentContents = commentContents;
     }
 
 }

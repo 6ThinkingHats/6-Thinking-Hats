@@ -5,6 +5,7 @@ import com.ssafy.sixhats.dao.VideoDAO;
 import com.ssafy.sixhats.dto.VideoGetResponseDTO;
 import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.VideoVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,12 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class VideoService {
 
-    @Autowired
-    RoomDAO roomDAO;
-    @Autowired
-    VideoDAO videoDAO;
+    private final RoomDAO roomDAO;
+    private final VideoDAO videoDAO;
 
     @Transactional
     public void postVideo(String videoFileUrl, Long roomId) {
@@ -28,7 +28,7 @@ public class VideoService {
                 .roomVO(roomVO)
                 .videoFileUrl(videoFileUrl)
                 .build();
-        System.out.println(videoVO.isVideoValid());
+
         videoDAO.save(videoVO);
     }
 
@@ -36,7 +36,7 @@ public class VideoService {
     public void patchVideo(Long videoId) {
         VideoVO videoVO = videoDAO.findById(videoId).orElse(null);
 
-        if (videoVO != null) {
+        if (videoVO != null && videoVO.isVideoValid()) {
             videoVO.updateVideoValid(false);
         } else {
             throw new NullPointerException("video is not exist");

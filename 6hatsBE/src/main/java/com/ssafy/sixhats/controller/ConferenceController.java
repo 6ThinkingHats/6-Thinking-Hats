@@ -3,6 +3,7 @@ package com.ssafy.sixhats.controller;
 import com.ssafy.sixhats.dto.ConferencePostRequestDTO;
 import com.ssafy.sixhats.service.ConferenceService;
 import com.ssafy.sixhats.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +14,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("conference")
+@RequiredArgsConstructor
 public class ConferenceController {
 
-    @Autowired
-    ConferenceService conferenceService;
-
-    @Autowired
-    JwtService jwtService;
+    private final ConferenceService conferenceService;
 
     @PostMapping("")
     public ResponseEntity postConference(@RequestBody ConferencePostRequestDTO conferencePostRequestDTO){
@@ -43,13 +41,4 @@ public class ConferenceController {
         return new ResponseEntity(resultMap, status);
     }
 
-    @DeleteMapping("{conferenceId}")
-    public ResponseEntity deleteConference(@PathVariable Long conferenceId){ // end time만 바꿔주면 됌
-        Map<String, Object> resultMap = new HashMap<>();
-        HttpStatus status = HttpStatus.NO_CONTENT;
-
-        conferenceService.deleteConference(conferenceId);
-
-        return new ResponseEntity(resultMap, status);
-    }
 }

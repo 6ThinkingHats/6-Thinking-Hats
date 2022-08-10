@@ -27,7 +27,7 @@ public class CommentGetResponseDTO {
         this.userId = commentVO.getUserVO().getUserId();
         this.boardId = commentVO.getBoardVO().getBoardId();
         this.commentId = commentVO.getCommentId();
-        this.comment_contents = commentVO.getComment_contents();
+        this.comment_contents = commentVO.getCommentContents();
         this.commentCreatedAt = commentVO.getCommentCreatedAt();
 
     }

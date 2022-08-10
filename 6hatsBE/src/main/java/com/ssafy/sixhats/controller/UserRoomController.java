@@ -2,6 +2,7 @@ package com.ssafy.sixhats.controller;
 
 import com.ssafy.sixhats.service.JwtService;
 import com.ssafy.sixhats.service.UserRoomService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("user_room")
+@RequiredArgsConstructor
 public class UserRoomController {
 
-    @Autowired
-    UserRoomService userRoomService;
-    @Autowired
-    JwtService jwtService;
+    private final UserRoomService userRoomService;
+    private final JwtService jwtService;
 
 
     @PostMapping("")

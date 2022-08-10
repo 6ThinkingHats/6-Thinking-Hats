@@ -7,33 +7,31 @@ import com.ssafy.sixhats.exception.UnAuthorizedException;
 import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.UserRoomVO;
 import com.ssafy.sixhats.vo.UserVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class UserRoomService {
 
-    @Autowired
-    UserRoomDAO userRoomDAO;
+    private final UserRoomDAO userRoomDAO;
 
-    @Autowired
-    UserDAO userDAO;
+    private final UserDAO userDAO;
 
-    @Autowired
-    RoomDAO roomDAO;
+    private final RoomDAO roomDAO;
 
     @Transactional
     public void postUserRoom(Long roomId, Long userId) {
         UserVO userVO = userDAO.findById(userId).orElse(null);
         RoomVO roomVO = roomDAO.findById(roomId).orElse(null);
 
-        if(userVO==null) {
+        if(userVO==null || !userVO.isActive()) {
             throw new NullPointerException("user not found");
         } else if (roomVO == null) {
             throw new NullPointerException("room not found");
-        }
-        if(!roomVO.isActive()) {
+        } else if(!roomVO.isActive()) {
             throw new NullPointerException("room is done");
         }
         UserRoomVO userRoomVO = userRoomDAO.findUserRoomVOByRoomVOAndUserVO(roomVO, userVO);
@@ -59,13 +57,14 @@ public class UserRoomService {
             throw new NullPointerException("user not found");
         } else if (roomVO == null) {
             throw new NullPointerException("room not found");
+        } else if(!roomVO.isActive()) {
+            throw new NullPointerException("room is done");
         }
         UserRoomVO userRoomVO = userRoomDAO.findUserRoomVOByRoomVOAndUserVO(roomVO, userVO);
         if(userRoomVO == null) {
             throw new NullPointerException("join user is not found");
         }
-        userRoomVO.setBanned(!userRoomVO.isBanned());
-
+        userRoomVO.updateBanned(!userRoomVO.isBanned());
 
     }
 }

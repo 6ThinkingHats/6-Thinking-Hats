@@ -18,7 +18,7 @@ import java.util.Date;
 @DynamicUpdate
 @Entity
 @Table(name = "room")
-@Data
+@Getter
 @NoArgsConstructor
 public class RoomVO {
 

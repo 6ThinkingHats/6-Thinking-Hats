@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.ssafy.sixhats.dao.UserDAO;
+import com.ssafy.sixhats.dto.BoardListResponseDTO;
 import com.ssafy.sixhats.exception.UnAuthorizedException;
 import com.ssafy.sixhats.vo.BoardVO;
 import com.ssafy.sixhats.dao.BoardDAO;
@@ -27,43 +28,45 @@ public class BoardService {
     private final BoardDAO boardDAO;
     private final UserDAO userDAO;
 
-
-
     //공지사항 전체
     @Transactional(readOnly = true)
-    public List<BoardResponseDTO> findNoticeAll() {
-
-        //System.out.println(boardDAO.findAll().stream().map(BoardResponseDTO::new).collect(Collectors.toList()));
-        //System.out.println(board);
+    public List<BoardListResponseDTO> getBoardNoticeList() {
 
         return boardDAO.findByBoardType(BoardType.ntc)
                 .stream()
-                .map(BoardResponseDTO::new)
+                .map(BoardListResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
     //qna 전체
     @Transactional(readOnly = true)
-    public List<BoardResponseDTO> findQnaAll() {
-
-        //System.out.println(boardDAO.findAll().stream().map(BoardResponseDTO::new).collect(Collectors.toList()));
-        //System.out.println(board);
+    public List<BoardListResponseDTO> getBoardQnaList() {
 
         return boardDAO.findByBoardType(BoardType.qna)
                 .stream()
-                .map(BoardResponseDTO::new)
+                .map(BoardListResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
     //게시글 하나
     @Transactional(readOnly = true)
-    public BoardResponseDTO findById(Long boardId) {
+    public BoardResponseDTO getBoard(Long boardId, Long userId) {
 
         BoardVO board = boardDAO.findById(boardId).orElse(null);
-       // System.out.println(board);
         if(board == null) {
             throw new NullPointerException("board Not Found");
+        } else if (board.getBoardType() == BoardType.qna){
+            
+            // user가 admin인지 확인하기 위해서 받아 와야함
+            UserVO user = userDAO.findById(userId).orElse(null);
+            
+            if(user == null) {
+                throw new NullPointerException("user Not Found");
+            } else  if(user.getUserType() != UserType.ADMIN && userId != board.getUserId().getUserId()){
+                throw new UnAuthorizedException();
+            }
         }
+
         return new BoardResponseDTO(board);
     }
 
@@ -74,12 +77,12 @@ public class BoardService {
                      -> usertype "USER"  -> boardtype "qna"
      */
     @Transactional
-    public BoardVO post(BoardPostRequestDTO boardPostRequestDTO) {
+    public void postBoard(Long userId, BoardPostRequestDTO boardPostRequestDTO) {
 
-        UserVO userId = userDAO.findById(boardPostRequestDTO.getUserId()).orElse(null);
+        UserVO user = userDAO.findById( userId ).orElse(null);
 
-        if( userId != null){
-            UserType userType = userId.getUserType();
+        if( user != null){
+            UserType userType = user.getUserType();
             if(userType == UserType.ADMIN){
                 boardPostRequestDTO.update(BoardType.ntc);
             } else {
@@ -89,7 +92,7 @@ public class BoardService {
             throw new NullPointerException("User Not Found");
         }
 
-        return boardDAO.save(boardPostRequestDTO.toEntity(userId));
+        boardDAO.save(boardPostRequestDTO.toEntity(user));
     }
 
     //게시글 수정
@@ -99,15 +102,16 @@ public class BoardService {
                      -> 작성자 아이디 != 유저 아이디 -> UnAuthorizedException()
      */
     @Transactional
-    public void patch(Long boardId, Long userId, BoardPatchRequestDTO boardPatchRequestDTO) {
+    public void patchBoard(Long boardId, Long userId, BoardPatchRequestDTO boardPatchRequestDTO) {
 
         BoardVO board = boardDAO.findById(boardId).orElse(null);
-
-        if( userId != board.getUserId().getUserId()) {
+        if(board == null ){
+            throw new NullPointerException("Board Not Found");
+        } else if( userId != board.getUserId().getUserId()) {
             throw new UnAuthorizedException();
-        } else {
-            board.patch(boardPatchRequestDTO);
         }
+
+        board.patch(boardPatchRequestDTO);
 
     }
 
@@ -122,10 +126,13 @@ public class BoardService {
 
         BoardVO board = boardDAO.findById(boardId).orElse(null);
 
-        if( userId != board.getUserId().getUserId()) {
+        if(board == null){
+            throw  new NullPointerException("Board Not Found");
+        } else if( userId != board.getUserId().getUserId()) {
             throw new UnAuthorizedException();
-        } else {
-            boardDAO.delete(board);
         }
+
+        boardDAO.delete(board);
+
     }
 }

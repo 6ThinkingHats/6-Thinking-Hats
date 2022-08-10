@@ -3,6 +3,7 @@ package com.ssafy.sixhats.controller;
 import com.ssafy.sixhats.dto.UserConferencePostRequestDTO;
 import com.ssafy.sixhats.service.JwtService;
 import com.ssafy.sixhats.service.UserConferenceService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("user_conference")
+@RequiredArgsConstructor
 public class UserConferenceController {
 
-    @Autowired
-    UserConferenceService userConferenceService;
+    private final UserConferenceService userConferenceService;
 
-    @Autowired
-    JwtService jwtService;
+    private final JwtService jwtService;
 
     @PostMapping("")
     public ResponseEntity postUserConference(HttpServletRequest request, @RequestBody UserConferencePostRequestDTO userConferencePostRequestDTO){

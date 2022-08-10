@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 public class BoardPatchRequestDTO {
 
     private String title;
-    private String board_contents;
+    private String boardContents;
 
     @Builder
-    public BoardPatchRequestDTO (String title, String board_contents) {
+    public BoardPatchRequestDTO (String title, String boardContents) {
         this.title = title;
-        this.board_contents = board_contents;
+        this.boardContents = boardContents;
     }
 
 }

@@ -16,7 +16,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "user_room")
 @Getter
-@Data
 public class UserRoomVO {
 
     @Id
@@ -42,5 +41,7 @@ public class UserRoomVO {
         this.roomVO = roomVO;
     }
 
-
+    public void updateBanned(boolean banned) {
+        this.banned = banned;
+    }
 }

@@ -7,21 +7,20 @@ import com.ssafy.sixhats.dto.UserConferencePostRequestDTO;
 import com.ssafy.sixhats.vo.ConferenceVO;
 import com.ssafy.sixhats.vo.UserVO;
 import com.ssafy.sixhats.vo.UserConferenceVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class UserConferenceService {
 
-    @Autowired
-    UserConferenceDAO userConferenceDAO;
+    private final UserConferenceDAO userConferenceDAO;
 
-    @Autowired
-    UserDAO userDAO;
+    private final UserDAO userDAO;
 
-    @Autowired
-    ConferenceDAO conferenceDAO;
+    private final ConferenceDAO conferenceDAO;
 
     @Transactional
     public void postUserConference(UserConferencePostRequestDTO userConferencePostRequestDTO) {

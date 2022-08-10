@@ -33,16 +33,18 @@ public class CommentService {
 
     //댓글 쓰기
     @Transactional
-    public CommentVO postComment(CommentPostRequestDTO commentPostRequestDTO) {
+    public void postComment(Long userId, CommentPostRequestDTO commentPostRequestDTO) {
 
-        UserVO userId = userDAO.findById(commentPostRequestDTO.getUserVO().getUserId()).orElse(null);
-        UserType userType = userId.getUserType();
+        UserVO user = userDAO.findById(userId).orElse(null);
+        BoardVO board = boardDAO.findById(commentPostRequestDTO.getBoardId()).orElse(null);
 
-        BoardVO boardId = boardDAO.findById(commentPostRequestDTO.getBoardVO().getBoardId()).orElse(null);
-
-        if( userType == UserType.ADMIN) {
-            CommentVO commentVO = commentPostRequestDTO.toEntity(userId, boardId);
-            return commentDAO.save(commentVO);
+        if(user == null || !user.isActive()) {
+            throw new NullPointerException("User Not Found");
+        } else if(board == null) {
+            throw new NullPointerException("Board Not Found");
+        } else if( user.getUserType() == UserType.ADMIN || user.getUserId() == board.getUserId().getUserId()) {
+            CommentVO commentVO = commentPostRequestDTO.toEntity(user, board);
+            commentDAO.save(commentVO);
         } else {
             throw new UnAuthorizedException();
         }
@@ -57,30 +59,26 @@ public class CommentService {
         if( userId != comment.getUserVO().getUserId()) {
             throw new UnAuthorizedException();
         } else {
-            comment.patchComment(commentPatchRequestDTO);
+            comment.patchComment(commentPatchRequestDTO.getCommentContents());
         }
     }
 
-    /*//댓글 전체 보기
-    @Transactional(readOnly = true)
-    public List<CommentGetResponseDTO> getAllComment() {
-
-        return commentDAO.findAll()
-                .stream()
-                .map(CommentGetResponseDTO::new)
-                .collect(Collectors.toList());
-    }
-
-     */
-
     //게시글당 댓글 보기
     @Transactional(readOnly = true)
-    public List<CommentGetResponseDTO> getAllBoardComment(Long boardId) {
+    public List<CommentGetResponseDTO> getCommentList(Long userId, Long boardId) {
 
-        BoardVO boardVO = boardDAO.findById(boardId).orElse(null);
+        UserVO user = userDAO.findById(userId).orElse(null);
+        BoardVO board = boardDAO.findById(boardId).orElse(null);
 
+        if(user == null || !user.isActive()) {
+            throw new NullPointerException("User Not Found");
+        } else if(board == null) {
+            throw new NullPointerException("Board Not Found");
+        } else if( user.getUserType() != UserType.ADMIN && user.getUserId() != board.getUserId().getUserId()) {
+            throw new UnAuthorizedException();
+        }
 
-        return commentDAO.findAllByBoardVO(boardVO)
+        return commentDAO.findAllByBoardVO(board)
                 .stream()
                 .map(CommentGetResponseDTO::new)
                 .collect(Collectors.toList());
@@ -89,7 +87,7 @@ public class CommentService {
 
     //댓글 삭제
     @Transactional
-    public void delete(Long commentId, Long userId) {
+    public void deleteComment(Long commentId, Long userId) {
 
         CommentVO commentVO = commentDAO.findById(commentId).orElse(null);
 

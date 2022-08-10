@@ -6,6 +6,7 @@ import com.ssafy.sixhats.service.JwtService;
 import com.ssafy.sixhats.service.OAuthService;
 import com.ssafy.sixhats.service.UserService;
 import com.ssafy.sixhats.vo.UserVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,23 +17,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("user")
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    JwtService jwtService;
+    private final JwtService jwtService;
 
-    @Autowired
-    OAuthService oAuthService;
+    private final OAuthService oAuthService;
 
     // User Create (POST)
     @PostMapping("")
     public ResponseEntity postUser(@RequestBody UserPostRequestDTO userPostRequestDTO){
-        System.out.println(userPostRequestDTO);
+
         userService.postUser(userPostRequestDTO);
 
         // email 확인 로직과 관련해서 고민중

@@ -8,7 +8,7 @@ import com.ssafy.sixhats.dto.CommentPostRequestDTO;
 import com.ssafy.sixhats.service.CommentService;
 import com.ssafy.sixhats.service.JwtService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +16,21 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
 
-    @Autowired
-    CommentService commentService;
+    private final CommentService commentService;
 
-    @Autowired
-    JwtService jwtService;
+    private final JwtService jwtService;
 
 
     @PostMapping("")
     public ResponseEntity postComment(@RequestBody CommentPostRequestDTO commentPostRequestDTO, HttpServletRequest request) {
 
-        commentService.postComment(commentPostRequestDTO);
+        Long userId = jwtService.getUserId(request);
+        commentService.postComment(userId, commentPostRequestDTO);
 
         return new ResponseEntity("comment create success", HttpStatus.CREATED);
     }
@@ -45,9 +45,11 @@ public class CommentController {
 
 
     @GetMapping(value = "")
-    public ResponseEntity<List<CommentGetResponseDTO>> getAllBoardComment(Long boardId) {
+    public ResponseEntity<List<CommentGetResponseDTO>> getCommentList(Long boardId, HttpServletRequest request) {
 
-        List<CommentGetResponseDTO> commentList = commentService.getAllBoardComment(boardId);
+        // 나중에 페이징 관련 요구처리 해야함
+        Long userId = jwtService.getUserId(request);
+        List<CommentGetResponseDTO> commentList = commentService.getCommentList(userId, boardId);
 
         return new ResponseEntity(commentList, HttpStatus.ACCEPTED);
 
@@ -57,8 +59,7 @@ public class CommentController {
     public ResponseEntity deleteComment(@PathVariable("comment_id") Long commentId, HttpServletRequest request) {
 
         Long userId = jwtService.getUserId(request);
-
-        commentService.delete(commentId, userId);
+        commentService.deleteComment(commentId, userId);
 
         return new ResponseEntity("comment delete success", HttpStatus.NO_CONTENT);
     }

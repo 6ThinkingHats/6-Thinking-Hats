@@ -3,15 +3,16 @@ package com.ssafy.sixhats.service;
 import com.ssafy.sixhats.dao.UserDAO;
 import com.ssafy.sixhats.dto.*;
 import com.ssafy.sixhats.vo.UserVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    UserDAO userDAO;
+    private final UserDAO userDAO;
 
     public UserVO postUser(UserPostRequestDTO userPostRequestDTO) {
         UserVO userVO = userPostRequestDTO.toEntity();

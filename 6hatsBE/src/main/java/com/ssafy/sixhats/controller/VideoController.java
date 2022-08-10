@@ -4,6 +4,7 @@ package com.ssafy.sixhats.controller;
 import com.ssafy.sixhats.dto.VideoGetResponseDTO;
 import com.ssafy.sixhats.service.JwtService;
 import com.ssafy.sixhats.service.VideoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
@@ -18,11 +19,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("video")
+@RequiredArgsConstructor
 public class VideoController {
 
+    // 영상 저장소를 설정하면서 필요하면 수정하기
 
-    @Autowired
-    VideoService videoService;
+    private final VideoService videoService;
 
     @PostMapping("")
     public ResponseEntity postVideo(String videoFileUrl, Long roomId) {

@@ -16,15 +16,13 @@ import java.time.LocalDate;
 @ToString
 public class CommentPostRequestDTO {
 
-    private UserVO userVO;
-    private BoardVO boardVO;
-    private String comment_contents;
+    private Long boardId;
+    private String commentContents;
 
     @Builder
-    public CommentPostRequestDTO(UserVO userVO, BoardVO boardVO, String comment_contents) {
-        this.userVO = userVO;
-        this.boardVO = boardVO;
-        this.comment_contents = comment_contents;
+    public CommentPostRequestDTO(Long boardId, String commentContents) {
+        this.boardId = boardId;
+        this.commentContents = commentContents;
 
     }
 
@@ -32,7 +30,7 @@ public class CommentPostRequestDTO {
         return CommentVO.builder()
                 .userVO(userVO)
                 .boardVO(boardVO)
-                .comment_contents(comment_contents)
+                .commentContents(commentContents)
                 .build();
     }
 

@@ -9,21 +9,21 @@ import com.ssafy.sixhats.vo.type.UserType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class BoardPostRequestDTO {
 
-    private Long userId;
     private String title;
-    private String board_contents;
+    private String boardContents;
     private BoardType boardType;
 
     @Builder
-    public BoardPostRequestDTO(Long userId, String title, String board_contents, BoardType boardType) {
-        this.userId = userId;
+    public BoardPostRequestDTO(String title, String boardContents, BoardType boardType) {
         this.title = title;
-        this.board_contents = board_contents;
+        this.boardContents = boardContents;
         this.boardType = boardType;
     }
 
@@ -35,7 +35,7 @@ public class BoardPostRequestDTO {
         return BoardVO.builder()
                 .userId(userId)
                 .title(title)
-                .board_contents(board_contents)
+                .boardContents(boardContents)
                 .boardType(boardType)
                 .build();
     }

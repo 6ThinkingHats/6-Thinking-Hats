@@ -20,7 +20,6 @@ import java.util.Date;
 @DynamicInsert
 @DynamicUpdate
 @Entity
-@Data
 @Table(name = "comment")
 public class CommentVO {
 
@@ -37,23 +36,23 @@ public class CommentVO {
     @Column(name = "comment_id")
     private Long commentId;
 
-    @Column(nullable = false, columnDefinition = "LONGTEXT")
-    private String comment_contents;
+    @Column(name = "comment_contents", nullable = false, columnDefinition = "LONGTEXT")
+    private String commentContents;
 
     @Column(nullable = false, name = "comment_created_at")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate commentCreatedAt = LocalDate.now();
 
     @Builder
-    public CommentVO(UserVO userVO, BoardVO boardVO, Long commentId, String comment_contents) {
+    public CommentVO(UserVO userVO, BoardVO boardVO, Long commentId, String commentContents) {
         this.userVO = userVO;
         this.boardVO = boardVO;
         this.commentId = commentId;
-        this.comment_contents = comment_contents;
+        this.commentContents = commentContents;
     }
 
-    public void patchComment(CommentPatchRequestDTO commentPatchRequestDTO) {
-        this.comment_contents = commentPatchRequestDTO.getComment_contents();
+    public void patchComment(String commentContents) {
+        this.commentContents = commentContents;
 
     }
 

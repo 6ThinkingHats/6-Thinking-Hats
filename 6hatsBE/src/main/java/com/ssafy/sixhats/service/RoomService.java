@@ -7,6 +7,7 @@ import com.ssafy.sixhats.dto.RoomGetResponseDTO;
 import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.UserRoomVO;
 import com.ssafy.sixhats.vo.UserVO;
+import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.digester.ArrayStack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,25 +18,22 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RoomService {
 
-    @Autowired
-    RoomDAO roomDAO;
+    private final RoomDAO roomDAO;
 
-    @Autowired
-    UserDAO userDAO;
+    private final UserDAO userDAO;
 
-    @Autowired
-    UserRoomDAO userRoomDAO;
+    private final UserRoomDAO userRoomDAO;
 
     @Transactional
     public void postRoom(Long userId) {
         UserVO userVO = userDAO.findById(userId).orElse(null);
         if(userVO != null && userVO.isActive()){
-            Date date = new Date();
             RoomVO roomVO = RoomVO.builder()
                     .userVO(userVO)
-                    .roomStartTime(new Date(date.getYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds()))
+                    .roomStartTime(new Date())
                     .build();
             roomDAO.save(roomVO);
         }
@@ -48,24 +46,9 @@ public class RoomService {
         if(roomVO != null ) {
             Date date = new Date();
             roomVO.RoomUpdate(opinionFileUrl, date);
-            System.out.println(roomVO);
 
         }
     }
-
-//    public RoomGetResponseDTO getRoom(Long roomId) {
-//        RoomVO roomVO = roomDAO.findById(roomId).orElse(null);
-//        if(roomVO !=null) {
-//            RoomGetResponseDTO roomGetResponseDTO = new RoomGetResponseDTO().builder()
-//                    .roomStartTime(roomVO.getRoomStartTime())
-//                    .roomEndTime(roomVO.getRoomEndTime())
-//                    .opinionFileUrl(roomVO.getOpinionFileUrl())
-//                    .build();
-//            return roomGetResponseDTO;
-//        } else{
-//            throw new NullPointerException("Room info Not Found");
-//        }
-//    }
 
     @Transactional
     public List<RoomGetResponseDTO> getRoomList(Long userId) {
@@ -82,18 +65,5 @@ public class RoomService {
         }
         return roomDtoList;
     }
-
-//    public void joinPostRoom(Long roomId, Long userId) {
-//        RoomVO roomVO = roomDAO.findById(roomId).orElse(null);
-//        UserVO userVO = userDAO.findById(userId).orElse(null);
-//        if(roomVO != null && roomVO.isActive() && userVO != null && userVO.isActive()) {
-//            UserRoomVO userRoomVO = new UserRoomVO().builder()
-//                    .roomVO(roomVO)
-//                    .userVO(userVO)
-//                    .build();
-//        }
-//    }
-
-
 
 }

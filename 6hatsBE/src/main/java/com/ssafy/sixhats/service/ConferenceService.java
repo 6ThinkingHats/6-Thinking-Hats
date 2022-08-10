@@ -5,6 +5,7 @@ import com.ssafy.sixhats.dao.RoomDAO;
 import com.ssafy.sixhats.dto.ConferencePostRequestDTO;
 import com.ssafy.sixhats.vo.ConferenceVO;
 import com.ssafy.sixhats.vo.RoomVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Service
+@RequiredArgsConstructor
 public class ConferenceService {
 
-    @Autowired
-    ConferenceDAO conferenceDAO;
+    private final ConferenceDAO conferenceDAO;
 
-    @Autowired
-    RoomDAO roomDAO;
+    private final RoomDAO roomDAO;
 
     @Transactional
     public void postConference(ConferencePostRequestDTO conferencePostRequestDTO) {
@@ -52,11 +52,4 @@ public class ConferenceService {
 
     }
 
-    public void deleteConference(Long conferenceId) {
-        try {
-            conferenceDAO.deleteById(conferenceId);
-        } catch (EmptyResultDataAccessException e){
-            throw new NullPointerException("Conference Not Found");
-        }
-    }
 }

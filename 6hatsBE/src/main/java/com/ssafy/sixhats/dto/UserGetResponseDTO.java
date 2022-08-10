@@ -25,4 +25,6 @@ public class UserGetResponseDTO {
         this.birth = birth;
         this.gender = gender;
     }
+
+
 }
