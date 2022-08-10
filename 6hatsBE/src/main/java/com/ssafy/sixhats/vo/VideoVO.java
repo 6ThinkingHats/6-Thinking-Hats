@@ -1,5 +1,6 @@
 package com.ssafy.sixhats.vo;
 
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -11,35 +12,37 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 
 @Entity
-@DynamicUpdate
-@DynamicInsert
 @NoArgsConstructor
-@Table(name = "user_room")
 @Getter
-@Data
-public class UserRoomVO {
+@DynamicInsert
+@DynamicUpdate
+@Table(name = "video")
+public class VideoVO {
 
     @Id
-    @Column(name = "user_room_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userRoomId;
+    @Column(name = "video_id")
+    private Long videoId;
+
 
     @ManyToOne
     @JoinColumn(name = "room_id")
     private RoomVO roomVO;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserVO userVO;
+    @Column(name = "video_file_url")
+    private String videoFileUrl;
 
-    @Column(name = "banned")
-    @ColumnDefault("true")
-    private boolean banned = true;
+    @Column(name = "video_valid", columnDefinition = "boolean default true")
+    private boolean videoValid = true;
 
     @Builder
-    public UserRoomVO(UserVO userVO, RoomVO roomVO) {
-        this.userVO = userVO;
+    public VideoVO(RoomVO roomVO, String videoFileUrl) {
         this.roomVO = roomVO;
+        this.videoFileUrl = videoFileUrl;
+    }
+
+    public void updateVideoValid(boolean videoValid) {
+        this.videoValid = videoValid;
     }
 
 

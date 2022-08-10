@@ -78,12 +78,6 @@ public class RoomService {
                             .opinionFileUrl(roomVO.getOpinionFileUrl())
                             .build());
         }
-
-        for (RoomGetResponseDTO a:roomDtoList) {
-            System.out.println("--");
-            System.out.println(a.getRoomEndTime());
-            System.out.println("--");
-        }
         return roomDtoList;
     }
 

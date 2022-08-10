@@ -34,14 +34,17 @@ public class RoomController {
     public ResponseEntity patchRoom(@PathVariable Long roomId) {
         roomService.patchRoom(roomId, "not");
 
-        return new ResponseEntity("exit room success", HttpStatus.ACCEPTED);
+        return new ResponseEntity("exit room success", HttpStatus.OK);
     }
 
     @GetMapping ("")
     public ResponseEntity getRoom(HttpServletRequest request) {
+        Map<String, Object> resultMap = new HashMap<>();
         List<RoomGetResponseDTO> roomList = roomService.getRoomList(jwtService.getUserId(request));
+        resultMap.put("message", "get Room info list success");
+        resultMap.put("roomlist", roomList);
 
-        return new ResponseEntity(roomList, HttpStatus.ACCEPTED);
+        return new ResponseEntity(resultMap, HttpStatus.OK);
 
     }
 
