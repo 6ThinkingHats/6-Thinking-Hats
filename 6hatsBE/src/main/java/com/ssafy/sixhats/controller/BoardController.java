@@ -49,7 +49,7 @@ public class BoardController {
 
     //게시글 하나
     @GetMapping(value = "/{board_id}")
-    public ResponseEntity<BoardResponseDTO> findById(@PathVariable("board_id") int boardId) {
+    public ResponseEntity<BoardResponseDTO> findById(@PathVariable("board_id") Long boardId) {
 
         BoardResponseDTO boardResponseDTO = boardService.findById(boardId);
 
@@ -67,7 +67,7 @@ public class BoardController {
 
     //게시글 수정
     @PatchMapping(value = "/{board_id}")
-    public ResponseEntity patch(@PathVariable("board_id") int boardId, @RequestBody BoardPatchRequestDTO boardPatchRequestDTO, HttpServletRequest request) {
+    public ResponseEntity patch(@PathVariable("board_id") Long boardId, @RequestBody BoardPatchRequestDTO boardPatchRequestDTO, HttpServletRequest request) {
 
         Long userId = jwtService.getUserId(request);
         boardService.patch(boardId, userId, boardPatchRequestDTO);
@@ -77,7 +77,7 @@ public class BoardController {
 
     //게시글 삭제
     @DeleteMapping(value = "/{board_id}")
-    public ResponseEntity delete(@PathVariable("board_id") int boardId, HttpServletRequest request) {
+    public ResponseEntity delete(@PathVariable("board_id") Long boardId, HttpServletRequest request) {
 
         Long userId = jwtService.getUserId(request);
 

@@ -57,7 +57,7 @@ public class BoardService {
 
     //게시글 하나
     @Transactional(readOnly = true)
-    public BoardResponseDTO findById(int boardId) {
+    public BoardResponseDTO findById(Long boardId) {
 
         BoardVO board = boardDAO.findById(boardId).orElse(null);
        // System.out.println(board);
@@ -99,7 +99,7 @@ public class BoardService {
                      -> 작성자 아이디 != 유저 아이디 -> UnAuthorizedException()
      */
     @Transactional
-    public void patch(Integer boardId, Long userId, BoardPatchRequestDTO boardPatchRequestDTO) {
+    public void patch(Long boardId, Long userId, BoardPatchRequestDTO boardPatchRequestDTO) {
 
         BoardVO board = boardDAO.findById(boardId).orElse(null);
 
@@ -118,7 +118,7 @@ public class BoardService {
                      -> 작성자 아이디 != 유저 아이디 -> UnAuthorizedException()
      */
     @Transactional
-    public void delete(int boardId, Long userId) {
+    public void delete(Long boardId, Long userId) {
 
         BoardVO board = boardDAO.findById(boardId).orElse(null);
 
