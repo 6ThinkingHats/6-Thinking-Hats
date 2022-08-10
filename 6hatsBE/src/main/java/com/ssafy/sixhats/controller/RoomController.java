@@ -23,7 +23,7 @@ public class RoomController {
 
     private final JwtService jwtService;
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity postRoom(HttpServletRequest request) {
         roomService.postRoom(jwtService.getUserId(request));
 

@@ -22,7 +22,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (HttpMethod.OPTIONS.matches(request.getMethod())) {
             return true;
         }
-        String token = jwtService.getJwtToken(request);
+        String token = jwtService.getJwtToken(request);;
         if(jwtService.checkJwtToken(token)){
             return true;
         } else {

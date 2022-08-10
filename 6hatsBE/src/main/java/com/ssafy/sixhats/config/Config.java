@@ -26,6 +26,13 @@ public class Config implements WebMvcConfigurer {
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/user/*")
                 .excludePathPatterns("/user/login")
-                .excludePathPatterns("/user");
+                .excludePathPatterns("/user")
+                .addPathPatterns("/board/*")
+                .excludePathPatterns("/board/notice")
+                .excludePathPatterns("/board/qna")
+                .addPathPatterns("/comment/*")
+                .addPathPatterns("/room")
+                .addPathPatterns("/user_room")
+                .addPathPatterns("/user_conference");
     }
 }
