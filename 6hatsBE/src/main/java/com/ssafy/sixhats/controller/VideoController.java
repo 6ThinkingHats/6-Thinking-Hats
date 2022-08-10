@@ -34,7 +34,7 @@ public class VideoController {
     public  ResponseEntity patchVideo(@PathVariable Long videoId) {
         videoService.patchVideo(videoId);
 
-        return new ResponseEntity("video delete success", HttpStatus.OK);
+        return new ResponseEntity("video delete success", HttpStatus.NO_CONTENT);
 
     }
 

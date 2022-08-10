@@ -25,20 +25,21 @@ public class UserRoomService {
 
     @Transactional
     public void postUserRoom(Long roomId, Long userId) {
-        System.out.println(userId);
-        RoomVO roomVO = roomDAO.findById(roomId).orElse(null);
-        System.out.println(roomVO);
         UserVO userVO = userDAO.findById(userId).orElse(null);
-        System.out.println(userVO);
+        RoomVO roomVO = roomDAO.findById(roomId).orElse(null);
+
         if(userVO==null) {
             throw new NullPointerException("user not found");
         } else if (roomVO == null) {
             throw new NullPointerException("room not found");
         }
+        if(!roomVO.isActive()) {
+            throw new NullPointerException("room is done");
+        }
         UserRoomVO userRoomVO = userRoomDAO.findUserRoomVOByRoomVOAndUserVO(roomVO, userVO);
         if(userRoomVO != null) {
             if(!userRoomVO.isBanned()) {
-                throw new UnAuthorizedException();
+                throw new UnAuthorizedException("you don't join this room");
             }
         } else {
             userRoomVO = new UserRoomVO().builder()
@@ -60,9 +61,10 @@ public class UserRoomService {
             throw new NullPointerException("room not found");
         }
         UserRoomVO userRoomVO = userRoomDAO.findUserRoomVOByRoomVOAndUserVO(roomVO, userVO);
-        System.out.println(userRoomVO.isBanned());
+        if(userRoomVO == null) {
+            throw new NullPointerException("join user is not found");
+        }
         userRoomVO.setBanned(!userRoomVO.isBanned());
-        System.out.println(userRoomVO.isBanned());
 
 
     }
