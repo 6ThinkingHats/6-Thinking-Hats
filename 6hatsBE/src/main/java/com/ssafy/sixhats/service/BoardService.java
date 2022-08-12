@@ -1,17 +1,16 @@
 package com.ssafy.sixhats.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.ssafy.sixhats.dao.UserDAO;
-import com.ssafy.sixhats.dto.BoardListResponseDTO;
+import com.ssafy.sixhats.dto.board.BoardListResponseDTO;
 import com.ssafy.sixhats.exception.UnAuthorizedException;
 import com.ssafy.sixhats.vo.BoardVO;
 import com.ssafy.sixhats.dao.BoardDAO;
-import com.ssafy.sixhats.dto.BoardPatchRequestDTO;
-import com.ssafy.sixhats.dto.BoardPostRequestDTO;
-import com.ssafy.sixhats.dto.BoardResponseDTO;
+import com.ssafy.sixhats.dto.board.BoardPatchRequestDTO;
+import com.ssafy.sixhats.dto.board.BoardPostRequestDTO;
+import com.ssafy.sixhats.dto.board.BoardResponseDTO;
 
 import com.ssafy.sixhats.vo.UserVO;
 import com.ssafy.sixhats.vo.type.BoardType;

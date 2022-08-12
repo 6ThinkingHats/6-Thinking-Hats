@@ -1,4 +1,4 @@
-package com.ssafy.sixhats.dto;
+package com.ssafy.sixhats.dto.comment;
 
 import com.ssafy.sixhats.vo.BoardVO;
 import com.ssafy.sixhats.vo.CommentVO;

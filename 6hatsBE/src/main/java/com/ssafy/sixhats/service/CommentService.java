@@ -4,13 +4,12 @@ import com.ssafy.sixhats.dao.BoardDAO;
 import com.ssafy.sixhats.dao.CommentDAO;
 import com.ssafy.sixhats.dao.UserDAO;
 
-import com.ssafy.sixhats.dto.*;
-
+import com.ssafy.sixhats.dto.comment.CommentGetResponseDTO;
+import com.ssafy.sixhats.dto.comment.CommentPatchRequestDTO;
+import com.ssafy.sixhats.dto.comment.CommentPostRequestDTO;
 import com.ssafy.sixhats.vo.BoardVO;
 import com.ssafy.sixhats.vo.CommentVO;
-import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.UserVO;
-import com.ssafy.sixhats.vo.type.BoardType;
 import com.ssafy.sixhats.vo.type.UserType;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ssafy.sixhats.exception.UnAuthorizedException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

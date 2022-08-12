@@ -1,10 +1,12 @@
 package com.ssafy.sixhats.service;
 
 import com.ssafy.sixhats.dao.UserDAO;
-import com.ssafy.sixhats.dto.*;
+import com.ssafy.sixhats.dto.user.UserGetResponseDTO;
+import com.ssafy.sixhats.dto.user.UserLoginRequestDTO;
+import com.ssafy.sixhats.dto.user.UserPostRequestDTO;
+import com.ssafy.sixhats.dto.user.UserPutRequestDTO;
 import com.ssafy.sixhats.vo.UserVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

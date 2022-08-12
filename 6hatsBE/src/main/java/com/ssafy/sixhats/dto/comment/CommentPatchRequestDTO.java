@@ -1,4 +1,4 @@
-package com.ssafy.sixhats.dto;
+package com.ssafy.sixhats.dto.comment;
 
 import lombok.Builder;
 import lombok.Getter;

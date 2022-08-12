@@ -1,20 +1,26 @@
-package com.ssafy.sixhats.dto;
+package com.ssafy.sixhats.dto.board;
 
 import com.ssafy.sixhats.vo.BoardVO;
 import com.ssafy.sixhats.vo.UserVO;
 import com.ssafy.sixhats.vo.type.BoardType;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Getter
 public class BoardResponseDTO {
 
-    private final String name;
-    private final Long boardId;
-    private final String title;
-    private final String boardContents;
-    private final BoardType boardType;
-    private final int views;
+    private String name;
+    private Long boardId;
+    private String title;
+    private String boardContents;
+    private BoardType boardType;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate boardCreatedAt;
+    private int views;
 
     @Builder
     public BoardResponseDTO(BoardVO board) {
@@ -24,5 +30,6 @@ public class BoardResponseDTO {
         this.boardContents = board.getBoardContents();
         this.boardType = board.getBoardType();
         this.views = board.getViews();
+        this.boardCreatedAt = board.getBoardCreatedAt();
     }
 }

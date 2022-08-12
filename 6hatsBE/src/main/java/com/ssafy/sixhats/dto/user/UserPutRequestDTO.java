@@ -1,4 +1,4 @@
-package com.ssafy.sixhats.dto;
+package com.ssafy.sixhats.dto.user;
 
 import com.ssafy.sixhats.vo.UserVO;
 import com.ssafy.sixhats.vo.type.Gender;

@@ -1,10 +1,9 @@
 package com.ssafy.sixhats.controller;
 
-import com.ssafy.sixhats.dto.UserConferencePostRequestDTO;
+import com.ssafy.sixhats.dto.conference.UserConferencePostRequestDTO;
 import com.ssafy.sixhats.service.JwtService;
 import com.ssafy.sixhats.service.UserConferenceService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

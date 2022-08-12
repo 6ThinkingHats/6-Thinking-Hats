@@ -1,9 +1,9 @@
 package com.ssafy.sixhats.controller;
 
 
-import com.ssafy.sixhats.dto.CommentGetResponseDTO;
-import com.ssafy.sixhats.dto.CommentPatchRequestDTO;
-import com.ssafy.sixhats.dto.CommentPostRequestDTO;
+import com.ssafy.sixhats.dto.comment.CommentGetResponseDTO;
+import com.ssafy.sixhats.dto.comment.CommentPatchRequestDTO;
+import com.ssafy.sixhats.dto.comment.CommentPostRequestDTO;
 
 import com.ssafy.sixhats.service.CommentService;
 import com.ssafy.sixhats.service.JwtService;

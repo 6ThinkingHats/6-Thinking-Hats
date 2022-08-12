@@ -1,7 +1,6 @@
 package com.ssafy.sixhats.vo;
 
-import com.ssafy.sixhats.dto.BoardPatchRequestDTO;
-import com.ssafy.sixhats.vo.UserVO;
+import com.ssafy.sixhats.dto.board.BoardPatchRequestDTO;
 import com.ssafy.sixhats.vo.type.BoardType;
 
 import lombok.Builder;
@@ -14,7 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 이 설정으로 setter 접근 막을 수 있음
  */
-import net.bytebuddy.asm.Advice;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -22,8 +20,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

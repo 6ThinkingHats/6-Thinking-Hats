@@ -2,15 +2,12 @@ package com.ssafy.sixhats.controller;
 
 import java.util.List;
 
-import com.ssafy.sixhats.dto.BoardListResponseDTO;
-import com.ssafy.sixhats.dto.BoardPatchRequestDTO;
-import com.ssafy.sixhats.dto.BoardPostRequestDTO;
-import com.ssafy.sixhats.dto.BoardResponseDTO;
-import com.ssafy.sixhats.exception.UnAuthorizedException;
+import com.ssafy.sixhats.dto.board.BoardListResponseDTO;
+import com.ssafy.sixhats.dto.board.BoardPatchRequestDTO;
+import com.ssafy.sixhats.dto.board.BoardPostRequestDTO;
+import com.ssafy.sixhats.dto.board.BoardResponseDTO;
 import com.ssafy.sixhats.service.BoardService;
 import com.ssafy.sixhats.service.JwtService;
-import com.ssafy.sixhats.vo.UserVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
