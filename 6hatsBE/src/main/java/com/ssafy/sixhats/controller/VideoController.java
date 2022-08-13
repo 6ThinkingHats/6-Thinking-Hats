@@ -35,25 +35,4 @@ public class VideoController {
 
     }
 
-    @GetMapping("{videoId}")
-    public ResponseEntity getVideo(@PathVariable Long videoId) {
-        Map<String, Object> resultMap = new HashMap<>();
-        VideoGetResponseDTO videoGetResponseDTO = videoService.getVideo(videoId);
-
-        resultMap.put("message", "get video info success");
-        resultMap.put("video", videoGetResponseDTO);
-
-        return new ResponseEntity(resultMap, HttpStatus.OK);
-    }
-
-    @GetMapping("")
-    public ResponseEntity getVideoList(Long roomId) {
-        Map<String, Object> resultMap = new HashMap<>();
-        List<VideoGetResponseDTO> videoList = videoService.getVideoList(roomId);
-
-        resultMap.put("message", "get video info list success");
-        resultMap.put("videolist", videoList);
-        return new ResponseEntity(resultMap, HttpStatus.OK);
-    }
-
 }

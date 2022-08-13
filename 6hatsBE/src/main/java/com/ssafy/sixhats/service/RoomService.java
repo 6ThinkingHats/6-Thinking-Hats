@@ -4,8 +4,11 @@ import com.ssafy.sixhats.dao.RoomDAO;
 import com.ssafy.sixhats.dao.UserDAO;
 import com.ssafy.sixhats.dao.UserRoomDAO;
 import com.ssafy.sixhats.dto.room.RoomGetResponseDTO;
+import com.ssafy.sixhats.dto.video.VideoGetResponseDTO;
+import com.ssafy.sixhats.exception.UnAuthorizedException;
 import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.UserVO;
+import com.ssafy.sixhats.vo.VideoVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,19 +51,34 @@ public class RoomService {
     }
 
     @Transactional
-    public List<RoomGetResponseDTO> getRoomList(Long userId) {
-        List<RoomVO> roomList = new ArrayList<>();
-        roomList = roomDAO.findAllByUserVO(userDAO.findById(userId).orElse(null));
+    public List<VideoGetResponseDTO> getRoomVideos(Long roomId, Long userId) {
 
-        List<RoomGetResponseDTO> roomDtoList = new ArrayList<>();
-        for (RoomVO roomVO:roomList) {
-            roomDtoList.add(new RoomGetResponseDTO().builder()
-                            .roomStartTime(roomVO.getRoomStartTime())
-                            .roomEndTime(roomVO.getRoomEndTime())
-                            .opinionFileUrl(roomVO.getOpinionFileUrl())
-                            .build());
+        UserVO userVO = userDAO.findById(userId).orElse(null);
+        RoomVO roomVO = roomDAO.findById(roomId).orElse(null);
+
+        if(userVO == null){
+            throw new NullPointerException("User Not Found");
+        } else if (roomVO == null) {
+            throw new NullPointerException("Room Not Found");
+        } else if (userId != roomVO.getUserVO().getUserId()) {
+            throw new UnAuthorizedException();
         }
-        return roomDtoList;
-    }
 
+        List<VideoVO> videos = roomVO.getVideos();
+
+        List<VideoGetResponseDTO> roomVideos = new ArrayList<>();
+
+        //System.out.println(videos.size());
+
+        for(VideoVO videoVO: videos) {
+            VideoGetResponseDTO videoGetResponseDTO = new VideoGetResponseDTO()
+                    .builder()
+                    .videoFileUrl(videoVO.getVideoFileUrl())
+                    .videoValid(videoVO.isVideoValid())
+                    .build();
+            roomVideos.add(videoGetResponseDTO);
+        }
+
+        return roomVideos;
+    }
 }
