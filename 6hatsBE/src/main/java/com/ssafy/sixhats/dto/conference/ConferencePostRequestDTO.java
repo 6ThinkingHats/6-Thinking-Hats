@@ -1,4 +1,4 @@
-package com.ssafy.sixhats.dto;
+package com.ssafy.sixhats.dto.conference;
 
 import com.ssafy.sixhats.vo.type.ConferenceCategory;
 import com.ssafy.sixhats.vo.type.ConferencePurpose;

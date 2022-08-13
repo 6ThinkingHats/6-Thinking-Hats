@@ -1,10 +1,10 @@
 package com.ssafy.sixhats.controller;
 
-import com.ssafy.sixhats.dto.RoomGetResponseDTO;
+import com.ssafy.sixhats.dto.room.RoomGetResponseDTO;
+import com.ssafy.sixhats.dto.video.VideoGetResponseDTO;
 import com.ssafy.sixhats.service.JwtService;
 import com.ssafy.sixhats.service.RoomService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,19 +37,18 @@ public class RoomController {
         return new ResponseEntity("exit room success", HttpStatus.OK);
     }
 
-    @GetMapping ("")
-    public ResponseEntity getRoomList(HttpServletRequest request) {
+    @GetMapping("{roomId}/videos")
+    public ResponseEntity getRoomVideos(@PathVariable Long roomId, HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
-        List<RoomGetResponseDTO> roomList = roomService.getRoomList(jwtService.getUserId(request));
-        resultMap.put("message", "get Room info list success");
-        resultMap.put("roomlist", roomList);
+        HttpStatus status = HttpStatus.OK;
 
-        return new ResponseEntity(resultMap, HttpStatus.OK);
+        Long userId = jwtService.getUserId(request);
 
+        List<VideoGetResponseDTO> roomVideos = roomService.getRoomVideos(roomId, userId);
+
+        resultMap.put("message", "get room videos success");
+        resultMap.put("roomVideos", roomVideos);
+
+        return new ResponseEntity(resultMap, status);
     }
-
-
-
-
-
 }

@@ -1,19 +1,14 @@
 package com.ssafy.sixhats.vo;
 
-import com.ssafy.sixhats.dto.BoardPatchRequestDTO;
-import com.ssafy.sixhats.dto.CommentPatchRequestDTO;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @NoArgsConstructor
 @Getter

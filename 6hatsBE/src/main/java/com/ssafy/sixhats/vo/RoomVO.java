@@ -1,10 +1,7 @@
 package com.ssafy.sixhats.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @DynamicInsert
 @DynamicUpdate
@@ -20,6 +18,7 @@ import java.util.Date;
 @Table(name = "room")
 @Getter
 @NoArgsConstructor
+@ToString
 public class RoomVO {
 
     @Id
@@ -47,6 +46,10 @@ public class RoomVO {
 
     @Column(name = "is_active")
     private boolean isActive = true;
+
+    @OneToMany()
+    @JoinColumn(name = "room_id")
+    private List<VideoVO> videos;
 
     @Builder
     public RoomVO(UserVO userVO, Date roomStartTime){

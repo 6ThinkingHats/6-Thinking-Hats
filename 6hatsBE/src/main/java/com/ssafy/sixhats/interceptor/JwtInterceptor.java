@@ -2,6 +2,7 @@ package com.ssafy.sixhats.interceptor;
 
 import com.ssafy.sixhats.exception.UnAuthorizedException;
 import com.ssafy.sixhats.service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -12,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 @Component
+@RequiredArgsConstructor
 public class JwtInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

@@ -1,7 +1,6 @@
 package com.ssafy.sixhats.vo;
 
-import com.ssafy.sixhats.dto.UserPatchRequestDTO;
-import com.ssafy.sixhats.dto.UserPutRequestDTO;
+import com.ssafy.sixhats.dto.user.UserPutRequestDTO;
 import com.ssafy.sixhats.vo.type.Gender;
 import com.ssafy.sixhats.vo.type.Job;
 import com.ssafy.sixhats.vo.type.LoginType;

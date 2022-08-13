@@ -2,11 +2,10 @@ package com.ssafy.sixhats.service;
 
 import com.ssafy.sixhats.dao.RoomDAO;
 import com.ssafy.sixhats.dao.VideoDAO;
-import com.ssafy.sixhats.dto.VideoGetResponseDTO;
+import com.ssafy.sixhats.dto.video.VideoGetResponseDTO;
 import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.VideoVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

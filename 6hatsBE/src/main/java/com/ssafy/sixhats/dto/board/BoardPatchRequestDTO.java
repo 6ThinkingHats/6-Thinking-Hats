@@ -1,4 +1,4 @@
-package com.ssafy.sixhats.dto;
+package com.ssafy.sixhats.dto.board;
 
 import com.ssafy.sixhats.vo.type.BoardType;
 import lombok.Builder;

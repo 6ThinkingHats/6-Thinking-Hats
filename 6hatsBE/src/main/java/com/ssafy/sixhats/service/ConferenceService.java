@@ -2,12 +2,10 @@ package com.ssafy.sixhats.service;
 
 import com.ssafy.sixhats.dao.ConferenceDAO;
 import com.ssafy.sixhats.dao.RoomDAO;
-import com.ssafy.sixhats.dto.ConferencePostRequestDTO;
+import com.ssafy.sixhats.dto.conference.ConferencePostRequestDTO;
 import com.ssafy.sixhats.vo.ConferenceVO;
 import com.ssafy.sixhats.vo.RoomVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

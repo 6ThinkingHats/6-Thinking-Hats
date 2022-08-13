@@ -1,4 +1,4 @@
-package com.ssafy.sixhats.dto;
+package com.ssafy.sixhats.dto.board;
 
 import com.ssafy.sixhats.dao.UserDAO;
 import com.ssafy.sixhats.vo.BoardVO;

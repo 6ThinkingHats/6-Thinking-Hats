@@ -1,4 +1,4 @@
-package com.ssafy.sixhats.dto;
+package com.ssafy.sixhats.dto.room;
 
 
 import lombok.Builder;

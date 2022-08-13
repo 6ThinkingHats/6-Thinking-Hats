@@ -1,13 +1,13 @@
 package com.ssafy.sixhats.controller;
 
-import com.ssafy.sixhats.dto.*;
+import com.ssafy.sixhats.dto.room.RoomGetResponseDTO;
+import com.ssafy.sixhats.dto.user.*;
 import com.ssafy.sixhats.exception.UnAuthorizedException;
 import com.ssafy.sixhats.service.JwtService;
 import com.ssafy.sixhats.service.OAuthService;
 import com.ssafy.sixhats.service.UserService;
 import com.ssafy.sixhats.vo.UserVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -53,6 +54,24 @@ public class UserController {
 
         resultMap.put("messge", "get user info success");
         resultMap.put("user", userGetResponseDTO);
+
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @GetMapping("{userId}/rooms")
+    public ResponseEntity getUserRooms(@PathVariable Long userId, HttpServletRequest request){
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.OK;
+
+        // 유저가 다른 유저의 정보를 요청했을 때
+        if(jwtService.getUserId(request) != userId){
+            throw new UnAuthorizedException();
+        }
+
+        List<RoomGetResponseDTO> rooms = userService.getUserRooms(userId);
+
+        resultMap.put("messge", "get user rooms info success");
+        resultMap.put("rooms", rooms);
 
         return new ResponseEntity(resultMap, status);
     }
@@ -128,7 +147,6 @@ public class UserController {
 
         Map<String, String> tokenMap = oAuthService.getKaKaoAccessToken(code);
         UserVO userVO = oAuthService.createKakaoUser(tokenMap.get("access-token"));
-        System.out.println(userVO);
         String token = jwtService.createToken(userVO);
         resultMap.put("access-token", token);
         resultMap.put("message", "Kakao Login Success");

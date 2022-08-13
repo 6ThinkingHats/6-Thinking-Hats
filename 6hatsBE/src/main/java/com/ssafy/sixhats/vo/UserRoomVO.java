@@ -1,9 +1,6 @@
 package com.ssafy.sixhats.vo;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -16,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "user_room")
 @Getter
+@ToString
 public class UserRoomVO {
 
     @Id
@@ -32,8 +30,8 @@ public class UserRoomVO {
     private UserVO userVO;
 
     @Column(name = "banned")
-    @ColumnDefault("true")
-    private boolean banned = true;
+    @ColumnDefault("false")
+    private boolean banned = false;
 
     @Builder
     public UserRoomVO(UserVO userVO, RoomVO roomVO) {

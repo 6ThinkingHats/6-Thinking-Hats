@@ -1,6 +1,5 @@
 package com.ssafy.sixhats.dao;
 
-import com.ssafy.sixhats.dto.RoomGetResponseDTO;
 import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.UserVO;
 import org.springframework.data.jpa.repository.JpaRepository;
