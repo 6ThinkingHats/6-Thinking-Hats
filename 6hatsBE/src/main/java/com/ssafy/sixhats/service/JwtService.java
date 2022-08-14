@@ -20,7 +20,7 @@ import java.util.Map;
 public class JwtService {
 
     private final String secretKey = "ssafySecret";
-    private final int EXPIRE_MINUTES = 60;
+    private final int EXPIRE_MINUTES = 60 * 24;
 
     public String getJwtToken(HttpServletRequest request) {
         return request.getHeader("accessToken");
