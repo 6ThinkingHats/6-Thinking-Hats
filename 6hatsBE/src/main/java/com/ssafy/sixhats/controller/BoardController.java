@@ -44,8 +44,17 @@ public class BoardController {
     }
 
     //게시글 하나
-    @GetMapping(value = "/{board_id}")
-    public ResponseEntity<BoardResponseDTO> getBoard(@PathVariable("board_id") Long boardId, HttpServletRequest request) {
+    @GetMapping(value = "notice/{board_id}")
+    public ResponseEntity<BoardResponseDTO> getBoardNotice(@PathVariable("board_id") Long boardId, HttpServletRequest request) {
+
+        Long userId = jwtService.getUserId(request);
+        BoardResponseDTO boardResponseDTO = boardService.getBoard(boardId, userId);
+
+        return new ResponseEntity(boardResponseDTO, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "qna/{board_id}")
+    public ResponseEntity<BoardResponseDTO> getBoardQna(@PathVariable("board_id") Long boardId, HttpServletRequest request) {
 
         Long userId = jwtService.getUserId(request);
         BoardResponseDTO boardResponseDTO = boardService.getBoard(boardId, userId);

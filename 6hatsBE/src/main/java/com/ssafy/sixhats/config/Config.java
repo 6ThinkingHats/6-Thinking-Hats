@@ -28,7 +28,7 @@ public class Config implements WebMvcConfigurer {
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/user")
                 .addPathPatterns("/board/*")
-                .excludePathPatterns("/board/notice")
+                .excludePathPatterns("/board/notice/*")
                 .excludePathPatterns("/board/qna")
                 .addPathPatterns("/comment/*")
                 .addPathPatterns("/room")
