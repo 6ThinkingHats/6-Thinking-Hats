@@ -61,7 +61,7 @@ public class BoardService {
             
             if(user == null) {
                 throw new NullPointerException("user Not Found");
-            } else  if(user.getUserType() != UserType.ADMIN && userId != board.getUserId().getUserId()){
+            } else  if( board.getBoardType() == BoardType.qna && user.getUserType() != UserType.ADMIN && userId != board.getUserId().getUserId()){
                 throw new UnAuthorizedException();
             }
         }

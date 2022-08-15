@@ -43,7 +43,7 @@ public class ExceptionAdvice {
     @ExceptionHandler(IOException.class)
     public ResponseEntity handleException(IOException e){
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("message", "oauth fail");
+        resultMap.put("message", "ioexception fail");
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
         return new ResponseEntity(resultMap, status);

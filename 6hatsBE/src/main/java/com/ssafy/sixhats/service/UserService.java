@@ -41,6 +41,7 @@ public class UserService {
                     .job(userVO.getJob())
                     .birth(userVO.getBirth())
                     .gender(userVO.getGender())
+                    .userType(userVO.getUserType())
                     .build();
             return userGetResponseDTO;
         } else {
@@ -60,6 +61,7 @@ public class UserService {
                     .job(userVO.getJob())
                     .birth(userVO.getBirth())
                     .gender(userVO.getGender())
+                    .userType(userVO.getUserType())
                     .build();
             return userGetResponseDTO;
         } else {
