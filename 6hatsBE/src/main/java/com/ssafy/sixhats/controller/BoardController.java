@@ -47,8 +47,7 @@ public class BoardController {
     @GetMapping(value = "notice/{board_id}")
     public ResponseEntity<BoardResponseDTO> getBoardNotice(@PathVariable("board_id") Long boardId, HttpServletRequest request) {
 
-        Long userId = jwtService.getUserId(request);
-        BoardResponseDTO boardResponseDTO = boardService.getBoard(boardId, userId);
+        BoardResponseDTO boardResponseDTO = boardService.getBoardNotice(boardId);
 
         return new ResponseEntity(boardResponseDTO, HttpStatus.OK);
     }

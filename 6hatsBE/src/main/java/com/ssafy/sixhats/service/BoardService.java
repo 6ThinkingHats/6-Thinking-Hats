@@ -61,7 +61,7 @@ public class BoardService {
             
             if(user == null) {
                 throw new NullPointerException("user Not Found");
-            } else  if( board.getBoardType() == BoardType.qna && user.getUserType() != UserType.ADMIN && userId != board.getUserId().getUserId()){
+            } else  if( user.getUserType() != UserType.ADMIN && userId != board.getUserId().getUserId()){
                 throw new UnAuthorizedException();
             }
         }
@@ -133,5 +133,14 @@ public class BoardService {
 
         boardDAO.delete(board);
 
+    }
+
+    public BoardResponseDTO getBoardNotice(Long boardId) {
+        BoardVO board = boardDAO.findById(boardId).orElse(null);
+        if(board == null) {
+            throw new NullPointerException("board Not Found");
+        }
+
+        return new BoardResponseDTO(board);
     }
 }
