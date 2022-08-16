@@ -8,20 +8,26 @@
         <input type="radio" name="hat-type" id="sixhats" :checked="hatMode === 'sixhats'"
         @click="clickChangeHatMode('sixhats')" class="sixhats-mode-btn">
         <label for="sixhats" class="sixhats-label">
-          <img src="@/assets/sixhats_mode.png" alt="" class="sixhats-img host-img" 
-          :class="{'hat-mode-checked': hatMode === 'sixhats'}">
+          <span v-if="hatMode === 'sixhats'" class="checked-hat-mode"></span>
+          <img src="@/assets/sixhats_mode.png" alt="" class="sixhats-img host-img">
         </label>
         <input type="radio" name="hat-type" id="onehat" :checked="hatMode === 'onehat'"
         @click="clickChangeHatMode('onehat')" class="onehat-mode-btn">
         <label for="onehat" class="onehat-label">
-          <img src="@/assets/onehat_mode.png" alt="" class="onehat-img host-img" 
-          :class="{'hat-mode-checked': hatMode === 'onehat'}">
+          <span v-if="hatMode === 'onehat'" class="checked-hat-mode"></span>
+          <img src="@/assets/onehat_mode.png" alt="" class="onehat-img host-img">
         </label>
       </div>
 
-      <div v-else>
-        <img src="@/assets/sixhats_mode.png" alt="" class="sixhats-img" :class="{'hat-mode-checked': hatMode === 'sixhats'}">
-        <img src="@/assets/onehat_mode.png" alt="" class="onehat-img" :class="{'hat-mode-checked': hatMode === 'onehat'}">
+      <div class="users-hat-mode" v-else>
+        <div>
+          <span v-if="hatMode === 'sixhats'" class="checked-hat-mode"></span>
+          <img src="@/assets/sixhats_mode.png" alt="" class="sixhats-img" :class="{'hat-mode-checked': hatMode === 'sixhats'}">
+        </div>
+        <div>
+          <span v-if="hatMode === 'onehat'" class="checked-hat-mode"></span>
+          <img src="@/assets/onehat_mode.png" alt="" class="onehat-img" :class="{'hat-mode-checked': hatMode === 'onehat'}">
+        </div>
       </div>
     </div>
 
@@ -29,33 +35,41 @@
       <p class="idea-type-setting-word">회의 모드</p>
       <div v-if="isHost">
         <input type="radio" name="idea-type" id="suggest"
-        @click="clickChangeIdeaMode('ideaSuggest')" :checked="ideaMode === 'ideaSuggest'">
-        <label for="suggest">아이디어 제안</label>
+        @click="clickChangeIdeaMode('ideaSuggest')" 
+        class="suggest-mode-btn"
+        :checked="ideaMode === 'ideaSuggest'">
+        <label for="suggest" class="host-suggest-label"
+        :class="{'selected-option': ideaMode === 'ideaSuggest'}">아이디어 제안</label>
         <input type="radio" name="idea-type" id="judge"
-        @click="clickChangeIdeaMode('ideaJudge')" :checked="ideaMode === 'ideaJudge'">
-        <label for="judge">아이디어 검증</label>
+        @click="clickChangeIdeaMode('ideaJudge')" 
+        class="judge-mode-btn"
+        :checked="ideaMode === 'ideaJudge'">
+        <label for="judge" class="host-judge-label"
+        :class="{'selected-option': ideaMode === 'ideaJudge'}">아이디어 검증</label>
       </div>
 
       <div v-else>
-        <span :class="{'selected-option': ideaMode === 'ideaSuggest'}">아이디어 제안</span>
-        <span :class="{'selected-option': ideaMode === 'ideaJudge'}">아이디어 검증</span>
+        <span :class="{'selected-option': ideaMode === 'ideaSuggest'}"
+        class="suggest-label">아이디어 제안</span>
+        <span :class="{'selected-option': ideaMode === 'ideaJudge'}"
+        class="judge-label">아이디어 검증</span>
       </div>
     </div>
     
     <div class="timer-setting">
       <p class="timer-word">타이머</p>
       <div v-if="isHost">
-        <select name="timer" id="time-select" @change="timeSettingChange($event)">
-          <option value="1" :selected="timeSetting === 1">1분</option>
-          <option value="3" :selected="timeSetting === 3">3분</option>
-          <option value="5" :selected="timeSetting === 5">5분</option>
-          <option value="7" :selected="timeSetting === 7">7분</option>
-          <option value="10" :selected="timeSetting === 10">10분</option>
+        <select class="host-timer-select" name="timer" id="time-select" @change="timeSettingChange($event)">
+          <option value="1" :selected="timeSetting === 1">1 minute</option>
+          <option value="3" :selected="timeSetting === 3">3 minute</option>
+          <option value="5" :selected="timeSetting === 5">5 minute</option>
+          <option value="7" :selected="timeSetting === 7">7 minute</option>
+          <option value="10" :selected="timeSetting === 10">10 minute</option>
         </select>
       </div>
 
       <div v-else>
-        <span>{{ timeSetting }}분</span>
+        <span class="timer-select">{{ timeSetting }} minute</span>
       </div>
     </div>
   </div>
@@ -117,8 +131,30 @@ export default {
 </script>
 
 <style scoped>
+.mode-setting-word {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.checked-hat-mode {
+  position: absolute;
+  width: 8.5938vw;
+  height: 10.4167vw;
+  border-radius: 0.6510vw;
+  background-color: rgba(182, 182, 182, 0.2);
+}
+
+.idea-type-setting {
+  margin-bottom: 12px;
+}
+
+.hat-type-setting-word, .idea-type-setting-word, .timer-word {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .selected-option {
-  color: brown;
+  background-color: rgba(182, 182, 182, 0.2);
 }
 
 .sixhats-mode-btn, .onehat-mode-btn {
@@ -134,14 +170,48 @@ export default {
 }
 
 .sixhats-img, .onehat-img {
+  border: 1px solid rgba(160, 160, 160, 0.5);
   width: 8.5938vw;
   height: 10.4167vw;
   border-radius: 0.6510vw;
   margin-right: 8px;
 }
 
-.hat-mode-checked {
-  box-shadow: 2px 2px 4px rgb(155, 155, 155);
+.users-hat-mode {
+  display: flex;
+}
+
+.suggest-label, .host-suggest-label {
+  margin-right: 8px;
+}
+
+.suggest-label, .judge-label, .host-suggest-label, .host-judge-label {
+  font-size: 14px;
+  padding: 4px;
+  border: 1px solid rgba(160, 160, 160, 0.5);
+  border-radius: 10px;
+}
+
+.suggest-mode-btn, .judge-mode-btn {
+  display: none;
+}
+
+.host-suggest-label:hover, .host-judge-label:hover {
+  cursor: pointer;
+}
+
+.host-timer-select, .timer-select {
+  width: 92px;
+  border: 1px solid rgba(160, 160, 160, 0.5);
+  border-radius: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.timer-select {
+  padding: 4px 16px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 </style>
