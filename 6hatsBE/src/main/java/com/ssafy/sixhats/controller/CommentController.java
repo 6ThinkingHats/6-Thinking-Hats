@@ -9,6 +9,7 @@ import com.ssafy.sixhats.service.CommentService;
 import com.ssafy.sixhats.service.JwtService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,11 +46,11 @@ public class CommentController {
 
 
     @GetMapping(value = "")
-    public ResponseEntity<List<CommentGetResponseDTO>> getCommentList(Long boardId, HttpServletRequest request) {
+    public ResponseEntity<List<CommentGetResponseDTO>> getCommentList(Long boardId, Pageable pageable, HttpServletRequest request) {
 
-        // 나중에 페이징 관련 요구처리 해야함
+        System.out.println(pageable);
         Long userId = jwtService.getUserId(request);
-        List<CommentGetResponseDTO> commentList = commentService.getCommentList(userId, boardId);
+        List<CommentGetResponseDTO> commentList = commentService.getCommentList(userId, boardId, pageable);
 
         return new ResponseEntity(commentList, HttpStatus.ACCEPTED);
 

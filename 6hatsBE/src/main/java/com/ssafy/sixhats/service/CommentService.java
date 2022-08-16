@@ -13,6 +13,7 @@ import com.ssafy.sixhats.vo.UserVO;
 import com.ssafy.sixhats.vo.type.UserType;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ssafy.sixhats.exception.UnAuthorizedException;
@@ -63,7 +64,7 @@ public class CommentService {
 
     //게시글당 댓글 보기
     @Transactional(readOnly = true)
-    public List<CommentGetResponseDTO> getCommentList(Long userId, Long boardId) {
+    public List<CommentGetResponseDTO> getCommentList(Long userId, Long boardId, Pageable pageable) {
 
         UserVO user = userDAO.findById(userId).orElse(null);
         BoardVO board = boardDAO.findById(boardId).orElse(null);
@@ -76,7 +77,7 @@ public class CommentService {
             throw new UnAuthorizedException();
         }
 
-        return commentDAO.findAllByBoardVO(board)
+        return commentDAO.findAllByBoardVO(board, pageable)
                 .stream()
                 .map(CommentGetResponseDTO::new)
                 .collect(Collectors.toList());
