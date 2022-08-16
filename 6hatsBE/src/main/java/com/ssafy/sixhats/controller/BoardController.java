@@ -8,6 +8,7 @@ import com.ssafy.sixhats.dto.board.BoardPostRequestDTO;
 import com.ssafy.sixhats.dto.board.BoardResponseDTO;
 import com.ssafy.sixhats.service.BoardService;
 import com.ssafy.sixhats.service.JwtService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,18 +28,19 @@ public class BoardController {
 
     //공지사항 전체
     @GetMapping(value = "/notice")
-    public ResponseEntity<List<BoardResponseDTO>> getBoardNoticeList() {
+    public ResponseEntity<List<BoardResponseDTO>> getBoardNoticeList(Pageable pageable) {
+        System.out.println(pageable);
         // 페이징 값을 나중에 받아와야 할 것
-        List<BoardListResponseDTO> boardResponseDTOList = boardService.getBoardNoticeList();
+        List<BoardListResponseDTO> boardResponseDTOList = boardService.getBoardNoticeList(pageable);
 
         return new ResponseEntity(boardResponseDTOList, HttpStatus.OK);
     }
 
     //qna 전체
     @GetMapping(value = "/qna")
-    public ResponseEntity<List<BoardResponseDTO>> getBoardQnaList() {
+    public ResponseEntity<List<BoardResponseDTO>> getBoardQnaList(Pageable pageable) {
 
-        List<BoardListResponseDTO> boardResponseDTOList = boardService.getBoardQnaList();
+        List<BoardListResponseDTO> boardResponseDTOList = boardService.getBoardQnaList(pageable);
 
         return new ResponseEntity(boardResponseDTOList, HttpStatus.OK);
     }

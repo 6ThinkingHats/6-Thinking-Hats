@@ -15,6 +15,7 @@ import com.ssafy.sixhats.dto.board.BoardResponseDTO;
 import com.ssafy.sixhats.vo.UserVO;
 import com.ssafy.sixhats.vo.type.BoardType;
 import com.ssafy.sixhats.vo.type.UserType;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,9 +30,9 @@ public class BoardService {
 
     //공지사항 전체
     @Transactional(readOnly = true)
-    public List<BoardListResponseDTO> getBoardNoticeList() {
+    public List<BoardListResponseDTO> getBoardNoticeList(Pageable pageable) {
 
-        return boardDAO.findByBoardType(BoardType.ntc)
+        return boardDAO.findAllByBoardType(BoardType.ntc, pageable)
                 .stream()
                 .map(BoardListResponseDTO::new)
                 .collect(Collectors.toList());
@@ -39,9 +40,9 @@ public class BoardService {
 
     //qna 전체
     @Transactional(readOnly = true)
-    public List<BoardListResponseDTO> getBoardQnaList() {
+    public List<BoardListResponseDTO> getBoardQnaList(Pageable pageable) {
 
-        return boardDAO.findByBoardType(BoardType.qna)
+        return boardDAO.findAllByBoardType(BoardType.qna, pageable)
                 .stream()
                 .map(BoardListResponseDTO::new)
                 .collect(Collectors.toList());
