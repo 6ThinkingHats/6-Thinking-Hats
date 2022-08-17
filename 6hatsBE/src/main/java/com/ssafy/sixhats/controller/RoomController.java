@@ -1,6 +1,7 @@
 package com.ssafy.sixhats.controller;
 
 import com.ssafy.sixhats.dto.room.RoomGetResponseDTO;
+import com.ssafy.sixhats.dto.room.RoomPatchRequestDTO;
 import com.ssafy.sixhats.dto.room.RoomPostRequestDTO;
 import com.ssafy.sixhats.dto.video.VideoGetResponseDTO;
 import com.ssafy.sixhats.service.JwtService;
@@ -32,8 +33,8 @@ public class RoomController {
     }
 
     @PatchMapping("{sessionId}")
-    public ResponseEntity patchRoom(@PathVariable String sessionId) {
-        roomService.patchRoom(sessionId, "not");
+    public ResponseEntity patchRoom(@PathVariable String sessionId, @RequestBody RoomPatchRequestDTO roomPatchRequestDTO) {
+        roomService.patchRoom(sessionId, roomPatchRequestDTO.getOpinionFileUrl());
 
         return new ResponseEntity("exit room success", HttpStatus.OK);
     }

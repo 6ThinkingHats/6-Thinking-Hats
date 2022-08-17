@@ -22,12 +22,12 @@ public class VideoController {
     private final VideoService videoService;
 
     @PostMapping("")
-    public ResponseEntity postVideo(String videoFileUrl, Long roomId) {
-        videoService.postVideo(videoFileUrl, roomId);
+    public ResponseEntity postVideo(String videoFileUrl, String sessionId) {
+        videoService.postVideo(videoFileUrl, sessionId);
         return new ResponseEntity("video save success", HttpStatus.ACCEPTED);
     }
 
-    @PatchMapping("{videoId}")
+    @PatchMapping("{sessionId}")
     public  ResponseEntity patchVideo(@PathVariable Long videoId) {
         videoService.patchVideo(videoId);
 

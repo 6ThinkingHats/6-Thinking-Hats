@@ -20,8 +20,8 @@ public class VideoService {
     private final VideoDAO videoDAO;
 
     @Transactional
-    public void postVideo(String videoFileUrl, Long roomId) {
-        RoomVO roomVO = roomDAO.findById(roomId).orElse(null);
+    public void postVideo(String videoFileUrl, String sessionId) {
+        RoomVO roomVO = roomDAO.findBySessionId(sessionId).orElse(null);
 
         VideoVO videoVO = new VideoVO().builder()
                 .roomVO(roomVO)
@@ -49,6 +49,7 @@ public class VideoService {
             VideoGetResponseDTO videoGetResponseDTO = new VideoGetResponseDTO().builder()
                     .videoFileUrl(videoVO.getVideoFileUrl())
                     .videoValid(videoVO.isVideoValid())
+                    .videoId(videoVO.getVideoId())
                     .build();
             return videoGetResponseDTO;
         } else {
@@ -64,7 +65,6 @@ public class VideoService {
         }
 
         List<VideoVO> videoVoList = new ArrayList<>();
-        System.out.println(videoVoList);
         videoVoList = videoDAO.findAllByRoomVO(roomVO);
         if(videoVoList == null ) {
             throw new NullPointerException("video is not found");
@@ -75,6 +75,7 @@ public class VideoService {
             videoDtoList.add(new VideoGetResponseDTO().builder()
                     .videoFileUrl(videoVO.getVideoFileUrl())
                     .videoValid(videoVO.isVideoValid())
+                    .videoId(videoVO.getVideoId())
                     .build());
         }
         return videoDtoList;

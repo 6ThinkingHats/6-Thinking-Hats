@@ -22,7 +22,6 @@ public class VideoVO {
     @Column(name = "video_id")
     private Long videoId;
 
-
     @ManyToOne
     @JoinColumn(name = "room_id")
     private RoomVO roomVO;
@@ -33,7 +32,6 @@ public class VideoVO {
     @Column(name = "video_valid", columnDefinition = "boolean default true")
     private boolean videoValid = true;
 
-
     @Builder
     public VideoVO(RoomVO roomVO, String videoFileUrl) {
         this.roomVO = roomVO;
@@ -43,6 +41,5 @@ public class VideoVO {
     public void updateVideoValid(boolean videoValid) {
         this.videoValid = videoValid;
     }
-
 
 }

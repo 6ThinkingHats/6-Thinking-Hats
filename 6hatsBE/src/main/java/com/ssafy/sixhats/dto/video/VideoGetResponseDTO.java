@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VideoGetResponseDTO {
 
+    private Long videoId;
     private String videoFileUrl;
-
     private boolean videoValid;
 
     @Builder
-    public VideoGetResponseDTO(String videoFileUrl, boolean videoValid) {
+    public VideoGetResponseDTO(Long videoId, String videoFileUrl, boolean videoValid) {
+        this.videoId = videoId;
         this.videoFileUrl = videoFileUrl;
         this.videoValid = videoValid;
     }

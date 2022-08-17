@@ -2,20 +2,19 @@ package com.ssafy.sixhats.dto.room;
 
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-
+@Getter
+@NoArgsConstructor
 public class RoomPatchRequestDTO {
-
-    private Date roomEndTime;
 
     private String opinionFileUrl;
 
-
     @Builder
-    public RoomPatchRequestDTO(Date roomEndTime, String opinionFileUrl) {
-        this.roomEndTime = roomEndTime;
+    public RoomPatchRequestDTO(String opinionFileUrl) {
         this.opinionFileUrl = opinionFileUrl;
     }
 
