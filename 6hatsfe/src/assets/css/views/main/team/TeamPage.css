@@ -4,20 +4,20 @@
 .team-body {
   width: 100%;
   height: calc(100% - 72px);
+  margin: auto;
 }
 
 /*teamPage 전체 바디로 봤을때 한줄 */
 .team-row {
+    margin:20px;
     display: flex;
-    flex-direction: row;
     justify-content: space-evenly;
-    margin-top: 10px;
 }
 
 .team-row-top {
   margin-top: 0;
-  padding-top: 30px;
-  padding-bottom: 20px;
+  /* padding-top: 30px;
+  padding-bottom: 20px; */
   align-items: center;
 }
 
@@ -40,12 +40,27 @@
 }
 /* fe be 나누는 버튼 세부 사항*/
 .button4 {
-    background-color: #C7C6C6;
-    color: black;
-    width: 50%;
+    background-color: #34A853;
+    color: white;
+    font-weight: bolder;
+    width: 40%;
+}
+.button5 {
+    background-color: #4285F4;
+    color: white;
+    font-weight: bolder;
+    width: 40%;
 }
 /* 팀원 한명 칸*/
 .polaroid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    margin: 5px;
+    border-radius: 8px;
+}
+.polaroid:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,15 +77,66 @@
     background-color: #FFFFFF;
     text-align: center;
     padding: 10px;
-    width:200px;
+    width:160px;
+    height: 160px;
 }
 /*팀원 사진 크기 */
 .profile {
     width: 130px;
-    height: 160px;
+    height: 130px;
 }
 
 .logo-team {
-  max-width: 100px;
+  width: 100px;
 }
+.flip-card {
+    background-color: transparent;
+    width: 70%;
+    height: 280px;
+    border: 1px solid #f1f1f1;
+    perspective: 1000px;
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    
 
+  }
+  
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+  
+  /* Style the front side (fallback if image is missing) */
+  .flip-card-front {
+    background-color: #34A853;
+    color: white;
+    padding: 10px;
+  }
+  
+  /* Style the back side */
+  .flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+    padding: 10px;
+  }
