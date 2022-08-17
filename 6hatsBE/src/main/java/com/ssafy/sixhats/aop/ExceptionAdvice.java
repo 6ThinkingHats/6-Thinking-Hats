@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
@@ -46,6 +47,14 @@ public class ExceptionAdvice {
         resultMap.put("message", "ioexception fail");
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
+        return new ResponseEntity(resultMap, status);
+    }
+
+    @ExceptionHandler(FileNotFoundException.class)
+    public  ResponseEntity handleException(FileNotFoundException e) {
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("message", "File Not Found");
+        HttpStatus status = HttpStatus.NOT_FOUND;
         return new ResponseEntity(resultMap, status);
     }
 }
