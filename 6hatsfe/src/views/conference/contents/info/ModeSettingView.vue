@@ -131,8 +131,8 @@ export default {
   display: none;
 }
 
-.hat-type-setting {
-  margin-bottom: 12px;
+.hat-type-setting, .idea-type-setting {
+  margin-bottom: 16px;
 }
 
 .host-img:hover {

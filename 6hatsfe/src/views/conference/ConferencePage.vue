@@ -139,8 +139,8 @@ import UserListModal from '@/views/conference/modal/UserListModal.vue'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 // const OPENVIDU_SERVER_URL = "https://" + 'i7a709.p.ssafy.io' + ":4443";
-const OPENVIDU_SERVER_URL = "https://" + 'i7a709.p.ssafy.io' + ":5000";
-// const OPENVIDU_SERVER_URL = "https://" + location.hostname + ":4443";
+// const OPENVIDU_SERVER_URL = "https://" + 'i7a709.p.ssafy.io' + ":5000";
+const OPENVIDU_SERVER_URL = "https://" + location.hostname + ":4443";
 const OPENVIDU_SERVER_SECRET = "MY_SECRET";
 
 export default {
@@ -787,7 +787,10 @@ export default {
 
         // 관전자일 때 회의가 시작되면 카메라 끄고 캠 화면 없앰
         if (this.myHat === 'spectator') {
-          this.turnOffVideo()
+          // this.turnOffVideo()
+          if (this.video) {
+            this.$refs.iconBar.changeVideo()
+          }
           this.session.unpublish(this.publisher)
         }
       }
