@@ -17,17 +17,18 @@ public class UserGetResponseDTO {
     private Job job;
     private LocalDate birth;
     private Gender gender;
-
+    private String profileImageUrl;
     private UserType userType;
 
     @Builder
-    public UserGetResponseDTO(String email,  String name, Job job, LocalDate birth, Gender gender, UserType userType){
+    public UserGetResponseDTO(String email,  String name, Job job, LocalDate birth, Gender gender, UserType userType, String profileImageUrl){
         this.email = email;
         this.name = name;
         this.job = job;
         this.birth = birth;
         this.gender = gender;
         this.userType = userType;
+        this.profileImageUrl = profileImageUrl;
     }
 
 

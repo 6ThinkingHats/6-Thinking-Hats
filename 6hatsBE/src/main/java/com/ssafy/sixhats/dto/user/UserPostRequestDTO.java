@@ -21,14 +21,17 @@ public class UserPostRequestDTO {
     private LocalDate birth;
     private Gender gender;
 
+    private String profileImageUrl;
+
     @Builder
-    public UserPostRequestDTO(String email, String password, String name, Job job, LocalDate birth, Gender gender){
+    public UserPostRequestDTO(String email, String password, String name, Job job, LocalDate birth, Gender gender, String profileImageUrl){
         this.email = email;
         this.password = password;
         this.name = name;
         this.job = job;
         this.birth = birth;
         this.gender = gender;
+        this.profileImageUrl = profileImageUrl;
     }
 
     public UserVO toEntity() {
@@ -38,6 +41,7 @@ public class UserPostRequestDTO {
                 .name(name)
                 .job(job)
                 .gender(gender)
+                .profileImageUrl(profileImageUrl)
                 .build();
     }
 }

@@ -54,8 +54,8 @@ public class UserVO {
     // Nullable 기준선 위에 필드들은 Builder로 안전하게 받을 수 있으어햠
     // 아래에는 전부 default가 잇으므로 설정하지 않아도 됌 후에 setter를 만들어서 처리
     @Column(nullable = false, name="profile_image_url", length = 100)
-    @ColumnDefault("'NOT'")
-    private String profileImageUrl = "NOT";
+    @ColumnDefault("'basic'")
+    private String profileImageUrl = "basic";
 
     @Column(name = "is_active", nullable = false)
     @ColumnDefault("true")
@@ -72,12 +72,13 @@ public class UserVO {
     private UserType userType = UserType.USER;
 
     @Builder
-    public UserVO(String email, String password, String name, Job job, Gender gender){
+    public UserVO(String email, String password, String name, Job job, Gender gender, String profileImageUrl){
         this.email = email;
         this.password = password;
         this.name = name;
         this.job = job;
         this.gender = gender;
+        this.profileImageUrl = profileImageUrl;
     }
 
     public void update(UserPutRequestDTO userPutRequestDTO) {
@@ -85,6 +86,7 @@ public class UserVO {
         this.name = userPutRequestDTO.getName();
         this.job = userPutRequestDTO.getJob();
         this.gender = userPutRequestDTO.getGender();
+        this.profileImageUrl = userPutRequestDTO.getProfileImageUrl();
     }
 
     public void updateUserType(UserType type) {

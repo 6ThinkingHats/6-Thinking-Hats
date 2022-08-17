@@ -43,6 +43,7 @@ public class UserService {
                     .birth(userVO.getBirth())
                     .gender(userVO.getGender())
                     .userType(userVO.getUserType())
+                    .profileImageUrl(userVO.getProfileImageUrl())
                     .build();
             return userGetResponseDTO;
         } else {
@@ -63,6 +64,7 @@ public class UserService {
                     .birth(userVO.getBirth())
                     .gender(userVO.getGender())
                     .userType(userVO.getUserType())
+                    .profileImageUrl(userVO.getProfileImageUrl())
                     .build();
             return userGetResponseDTO;
         } else {

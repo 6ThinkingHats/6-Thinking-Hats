@@ -20,12 +20,15 @@ public class UserPutRequestDTO {
     private LocalDate birth;
     private Gender gender;
 
+    private String profileImageUrl;
+
     @Builder
-    public UserPutRequestDTO(String email, String name, Job job, LocalDate birth, Gender gender){
+    public UserPutRequestDTO(String email, String name, Job job, LocalDate birth, Gender gender, String profileImageUrl){
         this.email = email;
         this.name = name;
         this.job = job;
         this.birth = birth;
         this.gender = gender;
+        this.profileImageUrl = profileImageUrl;
     }
 }
