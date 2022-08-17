@@ -2,6 +2,7 @@ package com.ssafy.sixhats.controller;
 
 
 import com.ssafy.sixhats.dto.video.VideoGetResponseDTO;
+import com.ssafy.sixhats.dto.video.VideoPostRequestDTO;
 import com.ssafy.sixhats.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,12 +23,12 @@ public class VideoController {
     private final VideoService videoService;
 
     @PostMapping("")
-    public ResponseEntity postVideo(String videoFileUrl, String sessionId) {
-        videoService.postVideo(videoFileUrl, sessionId);
+    public ResponseEntity postVideo(VideoPostRequestDTO videoPostRequestDTO) {
+        videoService.postVideo(videoPostRequestDTO);
         return new ResponseEntity("video save success", HttpStatus.ACCEPTED);
     }
 
-    @PatchMapping("{sessionId}")
+    @PatchMapping("{videoId}")
     public  ResponseEntity patchVideo(@PathVariable Long videoId) {
         videoService.patchVideo(videoId);
 

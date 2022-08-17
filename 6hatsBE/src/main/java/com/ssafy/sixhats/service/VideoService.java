@@ -3,6 +3,7 @@ package com.ssafy.sixhats.service;
 import com.ssafy.sixhats.dao.RoomDAO;
 import com.ssafy.sixhats.dao.VideoDAO;
 import com.ssafy.sixhats.dto.video.VideoGetResponseDTO;
+import com.ssafy.sixhats.dto.video.VideoPostRequestDTO;
 import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.VideoVO;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +21,12 @@ public class VideoService {
     private final VideoDAO videoDAO;
 
     @Transactional
-    public void postVideo(String videoFileUrl, String sessionId) {
-        RoomVO roomVO = roomDAO.findBySessionId(sessionId).orElse(null);
+    public void postVideo(VideoPostRequestDTO videoPostRequestDTO) {
+        RoomVO roomVO = roomDAO.findBySessionId(videoPostRequestDTO.getSessionId()).orElse(null);
 
         VideoVO videoVO = new VideoVO().builder()
                 .roomVO(roomVO)
-                .videoFileUrl(videoFileUrl)
+                .videoFileUrl(videoPostRequestDTO.getVideoFileUrl())
                 .build();
 
         videoDAO.save(videoVO);
