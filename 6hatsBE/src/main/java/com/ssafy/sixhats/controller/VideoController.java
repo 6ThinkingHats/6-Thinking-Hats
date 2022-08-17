@@ -23,7 +23,7 @@ public class VideoController {
     private final VideoService videoService;
 
     @PostMapping("")
-    public ResponseEntity postVideo(VideoPostRequestDTO videoPostRequestDTO) {
+    public ResponseEntity postVideo(@RequestBody VideoPostRequestDTO videoPostRequestDTO) {
         System.out.println();
         System.out.println();
         System.out.println();
