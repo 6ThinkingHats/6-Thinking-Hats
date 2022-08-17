@@ -72,7 +72,7 @@ export default {
       if (state.hatMode === 'sixhats' && state.myHat !== state.speechOrder[state.currentTurn]) {
         state.publisher.publishAudio(false)
       }
-      if (state.myHat == state.speechOrder[state.currentTurn]) {
+      if (state.hatMode === 'sixhats' && state.myHat == state.speechOrder[state.currentTurn]) {
         myturnAudio.play()
       }
     },
@@ -81,7 +81,7 @@ export default {
       if (state.hatMode === 'sixhats' && state.myHat !== state.speechOrder[state.currentTurn]) {
         state.publisher.publishAudio(false)
       }
-      if (state.myHat == state.speechOrder[state.currentTurn]) {
+      if (state.hatMode === 'sixhats' && state.myHat == state.speechOrder[state.currentTurn]) {
         myturnAudio.play()
       }
     },

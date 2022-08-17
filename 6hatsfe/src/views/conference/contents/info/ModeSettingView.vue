@@ -123,6 +123,10 @@ export default {
 </script>
 
 <style scoped>
+.mode-setting-word {
+  font-weight: bold;
+}
+
 .selected-option {
   color: brown;
 }
