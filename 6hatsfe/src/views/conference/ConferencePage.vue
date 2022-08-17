@@ -842,7 +842,10 @@ export default {
 
         // 관전자일 때 회의가 시작되면 카메라 끄고 캠 화면 없앰
         if (this.myHat === 'spectator') {
-          this.turnOffVideo()
+          // this.turnOffVideo()
+          if (this.video) {
+            this.$refs.iconBar.changeVideo()
+          }
           this.session.unpublish(this.publisher)
         }
       }
