@@ -125,19 +125,17 @@ public class UserService {
         for(UserRoomVO userRoomVO: userParticipateRooms){
             RoomVO roomVO = userRoomVO.getRoomVO();
 
-            if(!roomVO.isActive()) {
-                RoomGetResponseDTO roomGetResponseDTO = new RoomGetResponseDTO()
-                        .builder()
-                        .userId(roomVO.getUserVO().getUserId())
-                        .roomId(roomVO.getRoomId())
-                        .roomStartTime(roomVO.getRoomStartTime())
-                        .roomEndTime(roomVO.getRoomEndTime())
-                        .opinionFileUrl(roomVO.getOpinionFileUrl())
-                        .opinionFileValid(roomVO.isOpinionFileValid())
-                        .isCreator(false)
-                        .build();
-                userRoomList.add(roomGetResponseDTO);
-            }
+            RoomGetResponseDTO roomGetResponseDTO = new RoomGetResponseDTO()
+                    .builder()
+                    .userId(roomVO.getUserVO().getUserId())
+                    .roomId(roomVO.getRoomId())
+                    .roomStartTime(roomVO.getRoomStartTime())
+                    .roomEndTime(roomVO.getRoomEndTime())
+                    .opinionFileUrl(roomVO.getOpinionFileUrl())
+                    .opinionFileValid(roomVO.isOpinionFileValid())
+                    .isCreator(false)
+                    .build();
+            userRoomList.add(roomGetResponseDTO);
         }
 
         // 생성 날짜 순으로 sorting
