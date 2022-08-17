@@ -111,7 +111,7 @@
 
     <div v-if="subjectModalOpend" class="modal-bg"></div>
 
-    <div v-if="isConferencing && myHat === speechOrder[currentTurn]" 
+    <div v-if="isConferencing && myHat === speechOrder[currentTurn] && hatMode === 'sixhats'" 
           class="turn-alert-modal" :class="myHat">
       <span>당신의 차례입니다!</span>
     </div>
@@ -465,7 +465,9 @@ export default {
             const userInfo = { hatColor: 'spectator', connectionId: publisher.stream.session.connection.connectionId,
                               userName: this.name, isHost: this.isHost, camOn: false, micOn: false }
             this.addUser(userInfo)
-						this.session.publish(this.publisher);
+						if (!this.isConferencing) {
+              this.session.publish(this.publisher);
+            }
 					})
 					.catch(error => {
 						console.log('There was an error connecting to the session:', error.code, error.message);
