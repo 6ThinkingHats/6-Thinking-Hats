@@ -79,6 +79,7 @@ export default {
         console.log(res.data.length);
       }).catch((err) => {
         alert(err);
+        router.push({ name: "LandingPage" });
       });
     },
     addPageNum() {
