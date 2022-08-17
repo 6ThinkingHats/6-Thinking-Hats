@@ -24,6 +24,19 @@ public class VideoController {
 
     @PostMapping("")
     public ResponseEntity postVideo(VideoPostRequestDTO videoPostRequestDTO) {
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println(videoPostRequestDTO);
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
         videoService.postVideo(videoPostRequestDTO);
         return new ResponseEntity("video save success", HttpStatus.ACCEPTED);
     }
