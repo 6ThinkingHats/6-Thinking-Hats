@@ -49,7 +49,8 @@
       <!-- 의견 창구 입력 창 sixhats 모드 & onehat 모드 -->
       <div class="input-box" 
       v-if="(hatMode === 'sixhats' && (hatColor === speechOrder[currentTurn] || hatColor === 'blue-hat'))
-            || (hatMode === 'onehat' && hatColor !== 'spectator')">
+            || (hatMode === 'onehat' && hatColor !== 'spectator' && speechOrder[currentTurn] !== 'blue-hat')
+            || (hatMode === 'onehat' && hatColor === 'blue-hat' )">
         <input class="input-box-content" v-model="opinion" @keyup.enter="sendOpinion(opinion)">
         <i class='bx bxs-send' @click="sendOpinion(opinion)"></i>
       </div>

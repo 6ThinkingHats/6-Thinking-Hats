@@ -2,11 +2,14 @@
   <div class="icon-box">
     <button v-if="(isConferencing && hatColor !== 'spectator') || !isConferencing"
     @click="changeMic" 
-    :disabled="isConferencing && hatColor !== 'blue-hat' && 
-                hatColor !== speechOrder[currentTurn] && hatMode === 'sixhats'">
+    :disabled="
+    (isConferencing && hatColor !== 'blue-hat' && hatColor !== speechOrder[currentTurn] && hatMode === 'sixhats')
+    || (isConferencing && hatMode === 'onehat' && speechOrder[currentTurn] === 'blue-hat' && hatColor !== 'blue-hat')">
+    
     <i class='bx bxs-microphone-off mic' 
-    :class="{'disabled' : isConferencing && hatColor !== 'blue-hat' && hatColor !== speechOrder[currentTurn]
-                            && hatMode === 'sixhats'}"></i>
+    :class="{'disabled' : 
+    (isConferencing && hatColor !== 'blue-hat' && hatColor !== speechOrder[currentTurn] && hatMode === 'sixhats')
+    || (isConferencing && hatMode === 'onehat' && speechOrder[currentTurn] === 'blue-hat' && hatColor !== 'blue-hat')}"></i>
     </button>
 
     <button v-if="(isConferencing && hatColor !== 'spectator') || !isConferencing"
