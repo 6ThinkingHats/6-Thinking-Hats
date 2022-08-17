@@ -5,9 +5,10 @@ import com.ssafy.sixhats.vo.UserRoomVO;
 import com.ssafy.sixhats.vo.UserVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 public interface UserRoomDAO extends JpaRepository<UserRoomVO, Long> {
     UserRoomVO findUserRoomVOByRoomVOAndUserVO(RoomVO roomVO, UserVO userVO);
-    List<UserRoomVO> findAllByUserVOAndBanned(UserVO userVO, boolean banned);
+    List<UserRoomVO> findAllByUserVOAndBanned(UserVO userVO, boolean banned, Pageable pageable);
 }

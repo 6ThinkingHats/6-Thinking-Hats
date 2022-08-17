@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -102,7 +103,7 @@ public class UserService {
     }
 
     @Transactional
-    public List<RoomGetResponseDTO> getUserRooms(Long userId) {
+    public List<RoomGetResponseDTO> getUserRooms(Long userId, Pageable pageable) {
 
         UserVO userVO = userDAO.findById(userId).orElse(null);
 
@@ -111,34 +112,13 @@ public class UserService {
         }
 
         // 내가 참여한 방 목록
-        List<UserRoomVO> userParticipateRooms = userRoomDAO.findAllByUserVOAndBanned(userVO, false);
-
-        // 내가 생성한 방 목록
-        List<RoomVO> userCreateRooms = roomDAO.findAllByUserVO(userVO);
+        List<UserRoomVO> userParticipateRooms = userRoomDAO.findAllByUserVOAndBanned(userVO, false, pageable);
 
         /*
         두개를 합쳐서 여기에다가 넣음
         가장 최근에 만들어진게 앞으로 나오도록 구현
          */
         List<RoomGetResponseDTO> userRoomList = new ArrayList<>();
-
-        // 내가 생성한 방 목록 추가
-        // 끝난것만 넣어주기
-        for(RoomVO roomVO: userCreateRooms){
-            if(!roomVO.isActive()) {
-                RoomGetResponseDTO roomGetResponseDTO = new RoomGetResponseDTO()
-                        .builder()
-                        .userId(roomVO.getUserVO().getUserId())
-                        .roomId(roomVO.getRoomId())
-                        .roomStartTime(roomVO.getRoomStartTime())
-                        .roomEndTime(roomVO.getRoomEndTime())
-                        .opinionFileUrl(roomVO.getOpinionFileUrl())
-                        .opinionFileValid(roomVO.isOpinionFileValid())
-                        .isCreator(true)
-                        .build();
-                userRoomList.add(roomGetResponseDTO);
-            }
-        }
 
         // 내가 참여한 방 목록 추가
         // 끝난 것만 넣어주기

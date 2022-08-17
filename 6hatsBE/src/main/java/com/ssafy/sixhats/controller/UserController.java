@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.awt.print.Pageable;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +60,7 @@ public class UserController {
     }
 
     @GetMapping("{userId}/rooms")
-    public ResponseEntity getUserRooms(@PathVariable Long userId, HttpServletRequest request){
+    public ResponseEntity getUserRooms(@PathVariable Long userId, Pageable pageable, HttpServletRequest request){
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.OK;
 
@@ -68,7 +69,7 @@ public class UserController {
             throw new UnAuthorizedException();
         }
 
-        List<RoomGetResponseDTO> rooms = userService.getUserRooms(userId);
+        List<RoomGetResponseDTO> rooms = userService.getUserRooms(userId, pageable);
 
         resultMap.put("messge", "get user rooms info success");
         resultMap.put("rooms", rooms);
