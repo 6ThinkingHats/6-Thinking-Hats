@@ -12,10 +12,10 @@ import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.UserRoomVO;
 import com.ssafy.sixhats.vo.UserVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

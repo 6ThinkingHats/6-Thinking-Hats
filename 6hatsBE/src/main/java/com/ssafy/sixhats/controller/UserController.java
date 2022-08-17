@@ -8,12 +8,12 @@ import com.ssafy.sixhats.service.OAuthService;
 import com.ssafy.sixhats.service.UserService;
 import com.ssafy.sixhats.vo.UserVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.awt.print.Pageable;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
