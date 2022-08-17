@@ -9,6 +9,7 @@ import com.ssafy.sixhats.vo.VideoVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class VideoService {
     private final VideoDAO videoDAO;
 
     @Transactional
-    public void postVideo(VideoPostRequestDTO videoPostRequestDTO) {
+    public void postVideo(@RequestBody VideoPostRequestDTO videoPostRequestDTO) {
         RoomVO roomVO = roomDAO.findBySessionId(videoPostRequestDTO.getSessionId()).orElse(null);
 
         VideoVO videoVO = new VideoVO().builder()
