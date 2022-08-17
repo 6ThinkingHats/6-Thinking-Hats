@@ -1,14 +1,12 @@
 package com.ssafy.sixhats.controller;
 
+import com.ssafy.sixhats.dto.file.TxtPostRequestDTO;
 import com.ssafy.sixhats.util.RandomStringMaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
@@ -26,6 +24,43 @@ public class FIleController {
 
     private final String imagePath = "/home/ubuntu/static/img/";
     private final String videoPath = "/opt/openvidu/recordings/";
+    private final String txtPath = "/home/ubuntu/static/txt/";
+
+    // 의견 창구 파일 저장
+    @PostMapping("txt")
+    public ResponseEntity postTxt(@RequestBody TxtPostRequestDTO txtPostRequestDTO) throws IOException {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = HttpStatus.CREATED;
+
+        String filePath = txtPath + txtPostRequestDTO.getSessionId() + ".txt";
+        File file = new File(filePath);
+        if(!file.exists()) {
+            file.createNewFile();
+        }
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+
+        System.out.println(txtPostRequestDTO.getSessionId());
+        System.out.println(txtPostRequestDTO.getContents());
+        writer.write(txtPostRequestDTO.getContents());
+
+        writer.flush();
+        writer.close();
+
+        return new ResponseEntity(resultMap, status);
+    }
+
+    // 의견 창구 파일 불러오기
+    @GetMapping("txt")
+    public StreamingResponseBody getTxt(String opinionFileUrl) throws FileNotFoundException {
+        File file = new File(txtPath + opinionFileUrl + ".txt");
+        System.out.println(file);
+        final InputStream is = new FileInputStream(file);
+        return os -> {
+            readAndWrite(is, os);
+        };
+    }
+
     // 이미지 저장
     @PostMapping("image")
     public ResponseEntity postImage(String name, MultipartFile image, HttpServletRequest request) throws IOException {
@@ -59,8 +94,8 @@ public class FIleController {
 
     // 동영상 전송
     @GetMapping("video")
-    public StreamingResponseBody getVideo(String fileName) throws FileNotFoundException {
-        File file = new File(videoPath + fileName + "/" + fileName + ".mp4");
+    public StreamingResponseBody getVideo(String videoUrl) throws FileNotFoundException {
+        File file = new File(videoPath + videoUrl + "/" + videoUrl + ".mp4");
         System.out.println(file);
         final InputStream is = new FileInputStream(file);
         return os -> {
