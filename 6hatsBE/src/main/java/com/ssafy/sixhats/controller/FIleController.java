@@ -22,9 +22,9 @@ public class FIleController {
 
     private final RandomStringMaker randomStringMaker;
 
+    private final String txtPath = "/home/ubuntu/static/txt/";
     private final String imagePath = "/home/ubuntu/static/img/";
     private final String videoPath = "/opt/openvidu/recordings/";
-    private final String txtPath = "/home/ubuntu/static/txt/";
 
     // 의견 창구 파일 저장
     @PostMapping("txt")

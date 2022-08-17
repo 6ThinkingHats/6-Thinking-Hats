@@ -47,14 +47,18 @@ public class RoomVO {
     @Column(name = "is_active")
     private boolean isActive = true;
 
+    @Column(name = "session_id")
+    private String sessionId;
+
     @OneToMany()
     @JoinColumn(name = "room_id")
     private List<VideoVO> videos;
 
     @Builder
-    public RoomVO(UserVO userVO, Date roomStartTime){
+    public RoomVO(UserVO userVO, Date roomStartTime, String sessionId){
         this.userVO = userVO;
         this.roomStartTime = roomStartTime;
+        this.sessionId = sessionId;
     }
 
     public void RoomUpdate(String opinionFileUrl, Date roomEndTime) {

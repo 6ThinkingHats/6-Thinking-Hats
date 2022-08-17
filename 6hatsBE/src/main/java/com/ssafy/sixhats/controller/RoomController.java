@@ -1,6 +1,7 @@
 package com.ssafy.sixhats.controller;
 
 import com.ssafy.sixhats.dto.room.RoomGetResponseDTO;
+import com.ssafy.sixhats.dto.room.RoomPostRequestDTO;
 import com.ssafy.sixhats.dto.video.VideoGetResponseDTO;
 import com.ssafy.sixhats.service.JwtService;
 import com.ssafy.sixhats.service.RoomService;
@@ -24,27 +25,27 @@ public class RoomController {
     private final JwtService jwtService;
 
     @PostMapping("")
-    public ResponseEntity postRoom(HttpServletRequest request) {
-        roomService.postRoom(jwtService.getUserId(request));
+    public ResponseEntity postRoom(@RequestBody RoomPostRequestDTO roomPostRequestDTO,  HttpServletRequest request) {
+        roomService.postRoom(roomPostRequestDTO, jwtService.getUserId(request));
 
         return new ResponseEntity("room create success", HttpStatus.CREATED);
     }
 
-    @PatchMapping("{roomId}")
-    public ResponseEntity patchRoom(@PathVariable Long roomId) {
-        roomService.patchRoom(roomId, "not");
+    @PatchMapping("{sessionId}")
+    public ResponseEntity patchRoom(@PathVariable String sessionId) {
+        roomService.patchRoom(sessionId, "not");
 
         return new ResponseEntity("exit room success", HttpStatus.OK);
     }
 
-    @GetMapping("{roomId}/videos")
-    public ResponseEntity getRoomVideos(@PathVariable Long roomId, HttpServletRequest request) {
+    @GetMapping("{sessionId}/videos")
+    public ResponseEntity getRoomVideos(@PathVariable String sessionId, HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.OK;
 
         Long userId = jwtService.getUserId(request);
 
-        List<VideoGetResponseDTO> roomVideos = roomService.getRoomVideos(roomId, userId);
+        List<VideoGetResponseDTO> roomVideos = roomService.getRoomVideos(sessionId, userId);
 
         resultMap.put("message", "get room videos success");
         resultMap.put("roomVideos", roomVideos);

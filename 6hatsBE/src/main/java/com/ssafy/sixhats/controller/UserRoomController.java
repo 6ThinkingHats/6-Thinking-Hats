@@ -1,5 +1,6 @@
 package com.ssafy.sixhats.controller;
 
+import com.ssafy.sixhats.dto.room.RoomPostRequestDTO;
 import com.ssafy.sixhats.service.JwtService;
 import com.ssafy.sixhats.service.UserRoomService;
 import lombok.RequiredArgsConstructor;
@@ -20,16 +21,16 @@ public class UserRoomController {
 
     // 방 참여 확인 코드
     @PostMapping("")
-    public ResponseEntity postUserRoom(Long roomId, HttpServletRequest request) {
-        userRoomService.postUserRoom(roomId, jwtService.getUserId(request));
+    public ResponseEntity postUserRoom(@RequestBody RoomPostRequestDTO roomPostRequestDTO, HttpServletRequest request) {
+        userRoomService.postUserRoom(roomPostRequestDTO, jwtService.getUserId(request));
 
         return new ResponseEntity("join room success", HttpStatus.OK);
     }
 
     // 강퇴처리 코드
     @PatchMapping("")
-    public ResponseEntity patchUserRoom(Long roomId, HttpServletRequest request) {
-        userRoomService.patchUserRoom(roomId, jwtService.getUserId(request));
+    public ResponseEntity patchUserRoom(@RequestBody RoomPostRequestDTO roomPostRequestDTO, HttpServletRequest request) {
+        userRoomService.patchUserRoom(roomPostRequestDTO, jwtService.getUserId(request));
 
         return new ResponseEntity("user banned success", HttpStatus.OK);
     }
