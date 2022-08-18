@@ -23,6 +23,10 @@ public class UserPostRequestDTO {
 
     private String profileImageUrl;
 
+    public void updatePassword(String password){
+        this.password = password;
+    }
+
     @Builder
     public UserPostRequestDTO(String email, String password, String name, Job job, LocalDate birth, Gender gender, String profileImageUrl){
         this.email = email;

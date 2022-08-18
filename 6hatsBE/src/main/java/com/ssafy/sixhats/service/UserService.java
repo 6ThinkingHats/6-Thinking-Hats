@@ -8,6 +8,7 @@ import com.ssafy.sixhats.dto.user.UserGetResponseDTO;
 import com.ssafy.sixhats.dto.user.UserLoginRequestDTO;
 import com.ssafy.sixhats.dto.user.UserPostRequestDTO;
 import com.ssafy.sixhats.dto.user.UserPutRequestDTO;
+import com.ssafy.sixhats.util.SHA256;
 import com.ssafy.sixhats.vo.RoomVO;
 import com.ssafy.sixhats.vo.UserRoomVO;
 import com.ssafy.sixhats.vo.UserVO;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,8 +29,11 @@ public class UserService {
     private final UserDAO userDAO;
     private final UserRoomDAO userRoomDAO;
     private final RoomDAO roomDAO;
+    private final SHA256 sha256;
 
-    public UserVO postUser(UserPostRequestDTO userPostRequestDTO) {
+    public UserVO postUser(UserPostRequestDTO userPostRequestDTO) throws NoSuchAlgorithmException {
+        String encryptPassword = sha256.encrypt(userPostRequestDTO.getPassword());
+        userPostRequestDTO.updatePassword(encryptPassword);
         UserVO userVO = userPostRequestDTO.toEntity();
         userVO.updateBirth(userPostRequestDTO.getBirth());
         return userDAO.save(userVO);
@@ -93,9 +98,9 @@ public class UserService {
         }
     }
 
-    public UserVO loginGeneral(UserLoginRequestDTO userLoginRequestDTO){
+    public UserVO loginGeneral(UserLoginRequestDTO userLoginRequestDTO) throws NoSuchAlgorithmException {
         String email = userLoginRequestDTO.getEmail();
-        String password = userLoginRequestDTO.getPassword();
+        String password = sha256.encrypt(userLoginRequestDTO.getPassword());;
         UserVO userVO = userDAO.findByEmailAndPassword(email, password).orElse(null);
         if(userVO != null && userVO.isActive()){
             return userVO;

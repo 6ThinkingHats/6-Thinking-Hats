@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class UserController {
 
     // User Create (POST)
     @PostMapping("")
-    public ResponseEntity postUser(@RequestBody UserPostRequestDTO userPostRequestDTO){
+    public ResponseEntity postUser(@RequestBody UserPostRequestDTO userPostRequestDTO) throws NoSuchAlgorithmException {
 
         userService.postUser(userPostRequestDTO);
 
@@ -129,7 +130,7 @@ public class UserController {
 
     // User Login General
     @PostMapping("login")
-    public ResponseEntity loginGeneral(@RequestBody UserLoginRequestDTO userLoginRequestDTO){
+    public ResponseEntity loginGeneral(@RequestBody UserLoginRequestDTO userLoginRequestDTO) throws NoSuchAlgorithmException {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status = HttpStatus.OK;
 
