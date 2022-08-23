@@ -9,14 +9,12 @@
     <img v-else-if="opinion.hatColor === 'white-hat'" src="@/assets/whitehat_border_circle.png" alt="" class="opinion-item-hatface">
     <div class="user-info">
       <p class="username">{{ opinion.userName }}</p>
-      <p class="hatname">
-        <span v-if="opinion.hatColor === 'red-hat'">빨간모자</span>
-        <span v-else-if="opinion.hatColor === 'yellow-hat'">노란모자</span>
-        <span v-else-if="opinion.hatColor === 'green-hat'">초록모자</span>
-        <span v-else-if="opinion.hatColor === 'blue-hat'">파란모자</span>
-        <span v-else-if="opinion.hatColor === 'white-hat'">하얀모자</span>
-        <span v-else-if="opinion.hatColor === 'black-hat'">검은모자</span>
-      </p>
+      <p v-if="opinion.hatColor === 'red-hat'" class="hatname">빨간모자</p>
+      <p v-else-if="opinion.hatColor === 'yellow-hat'" class="hatname">노란모자</p>
+      <p v-else-if="opinion.hatColor === 'green-hat'" class="hatname">초록모자</p>
+      <p v-else-if="opinion.hatColor === 'blue-hat'" class="hatname">파란모자</p>
+      <p v-else-if="opinion.hatColor === 'white-hat'" class="hatname">하얀모자</p>
+      <p v-else-if="opinion.hatColor === 'black-hat'" class="hatname">검은모자</p>
     </div>
     <span class="opinion-word">{{ opinion.content }}</span>
     <i class='bx bx-x delete-icon' v-if="myHat === 'blue-hat'"
@@ -88,13 +86,17 @@ p {
   margin-left: 4px;
 }
 
-.username {
-  font-size: 0.9115vw;
+.user-info {
+  margin-right: 8px;
 }
 
-.hatname {
-  margin-right: 14px;
+.username, .hatname {
   font-size: 0.9115vw;
+  min-width: 3.3854vw;
+}
+
+.opinion-word {
+  padding: 4px;
 }
 
 .delete-icon {
