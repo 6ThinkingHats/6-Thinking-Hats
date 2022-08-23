@@ -19,7 +19,7 @@
       <td colspan="2">{{conversionTime(no.roomStartTime)}}</td>
       <td>{{timeGapcal(no.roomStartTime,no.roomEndTime)}}</td>
       <td v-if="no.opinionFileUrl && no.opinionFileValid">
-        <a @click="getTxt(no.opinionFileUrl)">다운로드</a>
+        <a class="file-download-btn" @click="getTxt(no.opinionFileUrl)">다운로드</a>
       </td>
       <td v-else>불가</td>
       <td><router-link :to="{
@@ -191,4 +191,7 @@ h1, p {
   background-color: #C7C6C6;
 }
 
+.file-download-btn:hover {
+  cursor: pointer;
+}
 </style>

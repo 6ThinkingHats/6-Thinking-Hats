@@ -14,7 +14,7 @@
     <tr v-for ="(no,idx) in roomVideos" :key="idx">
       <td scope="row">{{idx+1}}</td>
       <td colspan="2" v-if="no.videoValid">
-        <a @click="getVideo(no.videoFileUrl)">다운로드</a>
+        <a class="download-btn" @click="getVideo(no.videoFileUrl)">다운로드</a>
       </td>
       <td v-else>다운로드 불가</td>
     </tr>
@@ -106,5 +106,9 @@ h1, p {
 }
 .table{
   font-size: 14px;
+}
+
+.download-btn:hover {
+  cursor: pointer;
 }
 </style>
