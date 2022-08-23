@@ -14,7 +14,7 @@
     <tr v-for ="(no,idx) in roomVideos" :key="idx">
       <td scope="row">{{idx+1}}</td>
       <td colspan="2" v-if="no.videoValid">
-        <a class="download-btn" @click="getVideo(no.videoFileUrl)">다운로드</a>
+        <a class="download-btn" @click="getVideo(no.videoFileUrl, idx)">다운로드</a>
       </td>
       <td v-else>다운로드 불가</td>
     </tr>
@@ -39,14 +39,14 @@ export default {
     }
   },
   methods: {
-    getVideo(videoFileUrl) {
+    getVideo(videoFileUrl, idx) {
       axios.get('https://i7a709.p.ssafy.io:8081/file/video?videoUrl=' + videoFileUrl, {
                 responseType: "blob"
             }).then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', "test.mp4"); //or any other extension
+                link.setAttribute('download', `녹화파일-${idx + 1}.mp4`); //or any other extension
                 document.body.appendChild(link);
                 link.click();
             }).catch(exception => {

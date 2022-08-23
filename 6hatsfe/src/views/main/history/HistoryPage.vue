@@ -19,7 +19,7 @@
       <td colspan="2">{{conversionTime(no.roomStartTime)}}</td>
       <td>{{timeGapcal(no.roomStartTime,no.roomEndTime)}}</td>
       <td v-if="no.opinionFileUrl && no.opinionFileValid">
-        <a class="file-download-btn" @click="getTxt(no.opinionFileUrl)">다운로드</a>
+        <a class="file-download-btn" @click="getTxt(no.opinionFileUrl, no.roomStartTime)">다운로드</a>
       </td>
       <td v-else>불가</td>
       <td><router-link :to="{
@@ -132,14 +132,14 @@ export default {
         this.getHistories();
       }
       },
-      getTxt(file){
+      getTxt(file, roomStartTime){
         axios.get('https://i7a709.p.ssafy.io:8081/file/txt?opinionFileUrl=' + file, {
                 responseType: "blob"
             }).then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', "file.txt"); //or any other extension
+                link.setAttribute('download', `${roomStartTime.slice(0,10)}.txt`); //or any other extension
                 document.body.appendChild(link);
                 link.click();
             }).catch(exception => {
