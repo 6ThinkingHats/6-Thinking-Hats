@@ -45,7 +45,7 @@ export default {
     border-top: 1px solid #939393;
     background-color: white;
     box-sizing: border-box;
-      font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     
   }
 
