@@ -1,5 +1,5 @@
 <template>
-<body></body>
+<div></div>
 </template>
 
 <script>
@@ -172,6 +172,5 @@ class WaveGroup{
 
   canvas {
     width: 100%;
-  height: calc(100% - 60px);
   }
 </style>

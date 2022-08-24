@@ -46,7 +46,7 @@ export default {
     background-color: white;
     box-sizing: border-box;
     font-family: 'Noto Sans KR', sans-serif;
-    
+    z-index: 5;
   }
 
   .footer-text {
