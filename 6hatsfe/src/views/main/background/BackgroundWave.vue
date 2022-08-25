@@ -125,9 +125,9 @@ class Point {
       this.x = x;
       this.y = y;
       this.fieldY = y;
-      this.speed = 0.05;
+      this.speed = 0.03;
       this.cur = index; 
-      this.max = Math.random() * 170+30;
+      this.max = Math.random() * 120+10;
     }
   
     update() {
@@ -141,7 +141,7 @@ class WaveGroup{
     constructor() {
         this.totalWaves = 3;
         this.totalPoints = 6;
-        this.color = ['rgba(255,0,0,0.4)', 'rgba(255,255,0,0.4)', 'rgba(0,255,255,0.4)'];
+        this.color = ['rgba(255,0,0,0.6)', 'rgba(255,255,0,0.6)', 'rgba(0,255,255,0.6)'];
         this.waves = [];
         for (let i = 0; i < this.totalWaves; i++){
             const wave = new Wave(
