@@ -1,26 +1,10 @@
 # &#127913; 모자라지않은회의
 
-![회읠고고](/WIKI/LOGO.PNG)
+![회읠고고](WIKI/logo.PNG)
 
 <br>
 
 &#128293; **여섯가지의 아이디어**, 6hats thinking을 이용한 회의, 모자라지않은회의
-
----
-
-<br>
-
-&#10004; 사이트 주소
-
-https://i7a709.p.ssafy.io
-
-
-
-&#10004; UCC 영상
-
-!!!!!!!!!!!!!!!!!YOUTUBE 주소 넣기!!!!!!!!!!!!!!!!!!!!
-
-<br>
 
 ---
 
@@ -83,7 +67,7 @@ https://i7a709.p.ssafy.io
 
 ## &#128681; 주요 기능 1 : 회의 모드 설정에 따른 자동화 
 
-![회의자동화](/uploads/e70badba2fe17b10a1abfb47e600277a/회의자동화.gif)
+![회의자동화](/WIKI/회의자동화.gif)
 
 <br>
 
@@ -92,24 +76,24 @@ https://i7a709.p.ssafy.io
 파란 모자 역할을 맡은 참가자를 제외한 참가자들은 모두 같은 색의 모자를 쓰고 시작됩니다.   
 파란 모자가 다음 순서로 넘어가는 버튼을 누르거나 타이머의 시간이 다 지나면 다음 색깔의 모자로 넘어갑니다.     
 
-![1hat_mode-other_hat_screen_host_](/uploads/b30b93ac6019399c2e3adc4b22c56233/1hat_mode-other_hat_screen_host_.png)
+![1hat_mode-other_hat_screen_host_](/WIKI/1hat_mode-other_hat_screen_host_.png)
 
 - **Six Hats 모드** : 6명 이상의 참가자가 사용할 수 있는 모드입니다.   
 참가자마다 모자색이 정해져 있고 본인의 모자 순서가 되면 마이크와 의견창구를 사용 할 수 있게 됩니다.   
 파란 모자가 다음 순서로 넘어가는 버튼을 누르거나 타이머의 시간이 다 지나면 다음 색깔의 모자로 넘어가고 마이크와 의견창구를 사용할 수 없게 됩니다. 
 
-![6hat_mode-other_hat_screen_my_turn](/uploads/8ab60a538a77f92b1bc5ce8df8675532/6hat_mode-other_hat_screen_my_turn.png)
+![6hat_mode-other_hat_screen_my_turn](/WIKI/6hat_mode-other_hat_screen_my_turn.png)
 
 <br>
 
 회의 모드 2
 - **아이디어 제안 모드** : 아래의 그림처럼 모자의 발언 순서가 정해집니다.   
 
-![모자라지않은회의가상배경-003__1_](/uploads/9a86771d8d39aa03981441c4df63b5f4/모자라지않은회의가상배경-003__1_.png)
+![모자라지않은회의가상배경-003__1_](/WIKI/모자라지않은회의가상배경-003__1_.png)
 
 - **아이디어 검증 모드** :아래의 그림처럼 모자의 발언 순서가 정해집니다. 
 
-![모자라지않은회의가상배경-003](/uploads/6861a94c27c84ae8537aaf9253f544e9/모자라지않은회의가상배경-003.png)
+![모자라지않은회의가상배경-003](/WIKI/모자라지않은회의가상배경-003.png)
 
 <br>
 
@@ -119,11 +103,11 @@ https://i7a709.p.ssafy.io
 
 모자별 키워드 (파란모자일 경우)
 
-![키워드](/uploads/0e27b3bf78e024bdcd593055169ad2a3/키워드.PNG)
+![키워드](/WIKI/키워드.PNG)
 
 모자별 예시 (파란모자일 경우)
 
-![예시](/uploads/4bda695f14d71615dd95257f6a0acb85/예시.PNG)
+![예시](/WIKI/예시.PNG)
 
 
 ---
@@ -133,7 +117,7 @@ https://i7a709.p.ssafy.io
 의견 창구 : 모자 회의 참가자들이 자신의 발언 시간에 의견을 작성할 수 있는 칸입니다.  
 회의가 끝나면 회의 이력에서 파일로 저장된 의견창구를 다운로드 받을 수 있습니다.    
 
-![의견창구](/uploads/19c046e7f2d40ad6d28475191149469a/의견창구.PNG)
+![의견창구](/WIKI/의견창구.PNG)
 
 ---
 
@@ -142,31 +126,31 @@ https://i7a709.p.ssafy.io
 화면 녹화 : 회의에 들어가면 방장이 회의 화면을 녹화 할 수 있습니다.   
 회의가 끝나면 회의 이력에서 파일로 저장된 화면 녹화를 다운로드 받을 수 있습니다.    
 
-![녹화](/uploads/5559ad5f5d9654a4159ee54b09724a1d/녹화.PNG)
+![녹화](/WIKI/녹화.PNG)
 
 ---
 
 ### &#128205; 기본 기능 1 : 로그인, 로그아웃, 회원가입
 
-![로그인](/uploads/13cbeafc47d969700999d1aac9871445/로그인.gif)
+![로그인](/WIKI/로그인.gif)
 
 ---
 
 ### &#128205; 기본 기능 2 : 내 정보 보기, 수정 / 프로필 이미지 보기, 수정
 
-![내정보](/uploads/b87ce127612d0f86cd175742b015068c/내정보.gif)
+![내정보](/WIKI/내정보.gif)
 
 ---
 
 ### &#128205; 기본 기능 3 : 공지사항, QnA
 
-![공지사항](/uploads/10e785ac7c0398b768ef233c6e4fdc1b/공지사항.gif)
+![공지사항](/WIKI/공지사항.gif)
 
 ---
 
 ### &#128205; 기본 기능 4 : 6 Hats Thinking 설명
 
-![설명](/uploads/2db40963cbda564a13a8e570badcc7a1/설명.gif)
+![설명](/WIKI/설명.gif)
 
 ---
 
@@ -175,7 +159,7 @@ https://i7a709.p.ssafy.io
 방 생성 : 회의를 할 수 있는 방이 생성됩니다.   
 해당 링크를 통해 참가자들이 회의에 참가할 수 있습니다. 
 
-![방생성](/uploads/640e15c8f1fe3d42fba0f27a863df309/방생성.gif)
+![방생성](/WIKI/방생성.gif)
 
 ---
 
@@ -237,7 +221,7 @@ https://i7a709.p.ssafy.io
 <br>
 
 ### 🛠 프로젝트 빌드 
-&#10004;  [ exec.md ](https://lab.ssafy.com/s07-webmobile1-sub2/S07P12A709/-/blob/master/EXEC/exec.md)
+&#10004;  [ exec.md ](/EXEC/exec.md)
 
 <br>
 
@@ -251,25 +235,25 @@ https://i7a709.p.ssafy.io
 
 **🗺️ 아키텍처**
 
-![아키텍처](/uploads/249bcf73486278d4d091ac1655a5ae10/아키텍처.png)
+![아키텍처](/WIKI/아키텍처.png)
 
 <br>
 
 **🗺️ 와이어프레임**
 
-![와이어프레임](/uploads/6d225e3c6a4b821f9cf1b3282df808dc/와이어프레임.PNG)
+![와이어프레임](/WIKI/와이어프레임.PNG)
 
 <br>
 
 **🗺️ ERD**
 
-![Untitled](/uploads/a43d471d888d4bf41b6232fe297777c8/Untitled.png)
+![Untitled](/WIKI/Untitled.png)
 
 <br>
 
 **🗺️ REST API**
 
-![메ㅑ](/uploads/12cf864c2796f6ea4f4d986c01dd62d0/메ㅑ.PNG)
+![메ㅑ](/WIKI/메ㅑ.PNG)
 
 <br>
 
@@ -308,7 +292,7 @@ https://i7a709.p.ssafy.io
 
 &#10004; **GIT Flow**  
 
-![gittree](/uploads/affad01c539d64b489cd2dd9fe7cc3e4/gittree.png)
+![gittree](/WIKI/gittree.png)
 
 <br>
 
