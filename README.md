@@ -1,6 +1,6 @@
 # &#127913; 모자라지않은회의
 
-![회읠고고](/uploads/62fe847587dca6f23cf1c388e2f1d2a6/회읠고고.PNG)
+![회읠고고](/WIKI/LOGO.PNG)
 
 <br>
 
